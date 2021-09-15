@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@100;200;300;400;500&display=swap');
+
+body {
+  font-family: 'Urbanist', Geneva, Verdana, sans-serif;
+  background-color: rgb(10, 11, 12);
+  color: white;
+}
+
+.light {
+  font-weight: 200;
+}
