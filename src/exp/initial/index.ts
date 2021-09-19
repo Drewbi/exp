@@ -1,0 +1,1 @@
+export default { html: '<div>hello 1</div>' }
