@@ -1,5 +1,6 @@
 import './style.css'
 import exp from './exp'
+import 'ghspa'
 
 const app = document.querySelector<HTMLDivElement>('#app')!
 const base = '/exp/'
