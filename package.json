@@ -1,14 +1,12 @@
 {
   "name": "exp",
-  "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "serve": "vite preview"
+    "build": "tsc"
   },
   "devDependencies": {
-    "ghspa": "^1.0.0",
-    "typescript": "^4.3.2",
-    "vite": "^2.5.4"
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "p5": "^1.4.0"
   }
 }
