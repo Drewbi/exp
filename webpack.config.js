@@ -1,33 +1,24 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const expRoutes = require('./src/exp')
-
-const entry = { index: './src/utils/home.js' }
-expRoutes.forEach(exp => entry[exp.name] = './src/exp/' + exp.path)
 module.exports = {
   mode: "development",
-  entry,
+  entry: './src/index.js',
   output: {
     path: `${__dirname}/dist`,
     filename: "[name].js",
     assetModuleFilename: "[name][ext]"
   },
+  resolve: {
+    alias: {
+      '∆': path.resolve(__dirname, 'src/exp')
+    }
+  },
   module: {
     rules: [
-      { test: /\.css$/, use: ["style-loader", "css-loader"], },
-      {
-        test: /\.html$/,
-        type: "asset/resource",
-        generator: {
-          filename: "[name][ext]",
-        },
-      },
-      {
-        test: /\.html$/i,
-        use: ["extract-loader", "html-loader"],
-      },
+      { test: /\.css$/, use: ["style-loader", "css-loader"], }
     ]
   },
   devtool: "inline-source-map",
-  plugins: [ new CleanWebpackPlugin() ]
+  plugins: [ new CleanWebpackPlugin(), new HtmlWebpackPlugin({ template: './src/index.html' }) ]
 }
