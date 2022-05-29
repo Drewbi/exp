@@ -1,24 +1,40 @@
-import { Scene, OrthographicCamera, WebGLRenderer, IcosahedronGeometry, MeshBasicMaterial, Mesh } from 'three';
+import { Scene, OrthographicCamera, WebGLRenderer, PlaneGeometry, MeshBasicMaterial, Mesh } from 'three'
+import './style.css'
+import Boid from './boid'
+const EXPSIZE = 1000
 
-const scene = new Scene();
-const camera = new OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 0.1, 1000 );
+const scene = new Scene()
 
-const renderer = new WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
+const plane = new PlaneGeometry(1000, 1000)
+const material = new MeshBasicMaterial({ color: '#080808'})
+const bg = new Mesh( plane, material )
 
-const geometry = new IcosahedronGeometry( 100, 0 );
-const material = new MeshBasicMaterial( { color: '#aff' } );
-const ico = new Mesh( geometry, material );
-scene.add( ico );
+scene.add( bg )
 
-camera.position.z = 100;
+const camera = new OrthographicCamera( EXPSIZE / - 2, EXPSIZE / 2, EXPSIZE / 2, EXPSIZE / - 2, 0.0001, 10000 )
+camera.position.z = 100
 
-function animate() {
-	requestAnimationFrame( animate );
-  ico.rotation.x += 0.01
-  ico.rotation.y += 0.01
-	renderer.render( scene, camera );
+const renderer = new WebGLRenderer({ antialias: true })
+renderer.setSize( EXPSIZE, EXPSIZE )
+document.body.appendChild( renderer.domElement )
+
+const createBoids = (numBoids: number) => {
+    const boids: Boid[] = []
+    for(let i = 0; i < numBoids; i++) {
+        boids.push(new Boid((Math.random() * EXPSIZE) - EXPSIZE / 2, (Math.random() * EXPSIZE) - EXPSIZE / 2, 0))
+    }
+    return boids
 }
 
-animate();
+const boids = createBoids(10)
+boids.forEach(boid => scene.add( boid.mesh ))
+
+function animate() {
+    requestAnimationFrame( animate )
+
+    boids.forEach(boid => boid.updateBoid(boids) )
+
+    renderer.render( scene, camera )
+}
+
+animate()
