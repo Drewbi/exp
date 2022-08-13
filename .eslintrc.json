@@ -32,6 +32,7 @@
         "semi": [
             "error",
             "never"
-        ]
+        ],
+        "max-len": ["warn", 110]
     }
 }
