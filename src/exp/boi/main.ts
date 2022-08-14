@@ -5,17 +5,14 @@ import {
     PlaneGeometry,
     MeshBasicMaterial,
     Mesh,
-    CircleGeometry,
-    Raycaster,
     Vector3,
     Group,
-    DoubleSide
-} from 'three'
+    DoubleSide} from 'three'
 import './style.css'
 import Boid from './boid'
-import { BOUNDING_PLANES, BOUNDS_MARGIN, EXP_SIZE } from '../../utils/map'
+import { BOUNDS_MARGIN, EXP_SIZE } from '../../utils/map'
 
-const scene = new Scene()
+export const scene = new Scene()
 
 // const bgplane = new PlaneGeometry(EXP_SIZE, EXP_SIZE)
 // const bgmaterial = new MeshBasicMaterial({ color: '#080808'})
@@ -44,7 +41,6 @@ for(let i = 0; i < 4; i++) {
 walls.name = 'walls'
 scene.add( walls )
 
-
 const camera = new OrthographicCamera(
     0, EXP_SIZE,
     0, EXP_SIZE,
@@ -67,8 +63,7 @@ const createBoids = (numBoids: number) => {
     return boids
 }
 
-// const boids = createBoids(1)
-const boids = [new Boid(200, 500, 2)]
+export const boids = createBoids(10)
 boids.forEach(boid => scene.add( boid.mesh ))
 boids.forEach(boid => boid.updateBoid() )
 

@@ -22,4 +22,4 @@ export const BOUNDS: Boundary[] = [
     { axis: 'y', normal: new Vector3(0, -1, 0), offset: EXP_SIZE },
 ]
 
-export const BOUNDS_MARGIN = 100
+export const BOUNDS_MARGIN = 40
