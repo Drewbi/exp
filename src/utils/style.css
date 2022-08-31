@@ -8,6 +8,10 @@ body {
 }
 
 canvas {
-    border: #fff 1.5px solid;
-    border-radius: 2px;
+    --size: min(1000px, 80vw);
+
+    border: #fff 2px solid;
+    border-radius: 10px;
+    width: var(--size) !important;
+    height: var(--size) !important;
 }
