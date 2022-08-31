@@ -1,12 +1,13 @@
-import { CylinderGeometry, MeshBasicMaterial, Mesh, Vector3, SphereGeometry } from 'three'
+import { CylinderGeometry, MeshBasicMaterial, Mesh, Vector3, SphereGeometry, PointsMaterial, Quaternion } from 'three'
 import { boids, scene } from './main'
-import { calcTurnFactor, getVisibleBoids } from './utils'
+import { calcTurnFactor, getForwardVector, getVisibleBoids } from './utils'
 export class Boid {
     geometry: CylinderGeometry
     material: MeshBasicMaterial
     mesh: Mesh
     speed: number
     cenDot: Mesh
+    groupingFactor: number
 
     constructor(initialX: number, initialY: number, initialRotation: number) {
         this.geometry = new CylinderGeometry(0, 10, 20, 3, 1)
@@ -15,31 +16,39 @@ export class Boid {
         this.mesh.position.x = initialX
         this.mesh.position.y = initialY
         this.mesh.rotation.z = initialRotation
-        this.speed = 3
+        this.speed = 1
+
         const dotGeo = new SphereGeometry(2)
-        const dotMat = new MeshBasicMaterial(
-            { color: '#0099ff' }
-        )
+        const dotMat = new PointsMaterial( { color: '#333' } )
         const dot = new Mesh(dotGeo, dotMat)
         this.cenDot = dot
         scene.add(dot)
+
+        this.groupingFactor = 0.05
     }
 
     updateBoid() {
         this.flyTowardsCentre()
         this.avoidWalls()
-        const forward = new Vector3(0, this.speed, 0).applyAxisAngle(
-            new Vector3(0, 0, 1), this.mesh.rotation.z)
+        const forward = getForwardVector(this.mesh.rotation.z).multiplyScalar(this.speed)
         this.mesh.position.add(forward)
     }
 
     flyTowardsCentre() {
         const visiBoids = getVisibleBoids(this, boids, 300)
-        const cen = visiBoids.reduce((prev: Vector3, curr: Boid) => {
-            return prev.clone().add(curr.mesh.position)
-        }, new Vector3(0, 0, 0)).divideScalar(visiBoids.length)
-        this.cenDot.position.set(cen.x, cen.y, cen.z)
-        this.mesh.rotation
+        if (visiBoids && visiBoids.length > 0) {
+            const centre = visiBoids.reduce((prev: Vector3, curr: Boid) => {
+                return prev.clone().add(curr.mesh.position)
+            }, new Vector3(0, 0, 0)).divideScalar(visiBoids.length)
+            this.cenDot.position.set(centre.x, centre.y, centre.z)
+            const forward = getForwardVector(this.mesh.rotation.z)
+            const vectorToCentre = centre.sub(this.mesh.position).normalize()
+            const angleOfTurn = vectorToCentre.angleTo(forward)
+            const endRotation = new Quaternion().setFromAxisAngle(
+                new Vector3(0, 0, 1), angleOfTurn)
+            const nextRotation = new Quaternion().rotateTowards(endRotation, this.groupingFactor)
+            this.mesh.applyQuaternion(nextRotation) 
+        }
     }
 
     avoidWalls() {

@@ -6,3 +6,10 @@ export const setRotationMatrix = (matrix: Matrix4, angle: number) => {
         0, 0, 1, 0,
         0,0, 0, 1)
 }
+
+export const setInverseRotationMatrix = (matrix: Matrix4, angle: number) => {
+    matrix.set(Math.cos(angle), Math.sin(angle), 0, 0,
+        -1 * Math.sin(angle), Math.cos(angle), 0, 0,
+        0, 0, 1, 0,
+        0,0, 0, 1)
+}

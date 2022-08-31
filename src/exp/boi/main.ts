@@ -56,14 +56,17 @@ const createBoids = (numBoids: number) => {
     const boids: Boid[] = []
     for(let i = 0; i < numBoids; i++) {
         boids.push(new Boid(
-            (Math.random()) * EXP_SIZE,
-            (Math.random()) * EXP_SIZE, Math.random() * 2 * Math.PI)
+            Math.random() * EXP_SIZE,
+            Math.random() * EXP_SIZE, Math.random() * (2 * Math.PI))
         )
     }
     return boids
 }
-
-export const boids = createBoids(10)
+// export const boids = createBoids(10)
+export const boids = [
+    new Boid(500, 600, Math.PI + 0.1),
+    new Boid(500, 400, -0.1)
+]
 boids.forEach(boid => scene.add( boid.mesh ))
 boids.forEach(boid => boid.updateBoid() )
 

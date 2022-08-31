@@ -86,4 +86,12 @@ function getVisibleBoids(boid: Boid, allBoids: Boid[], visibility: number): Boid
         boid.mesh.position.distanceTo(testBoid.mesh.position) < visibility)
 }
 
-export { getCentre, getBoundingHit, getBoundingPlane, calcTurnFactor, getVisibleBoids }
+function getForwardVector(angle: number): Vector3 {
+    return new Vector3(0, 1, 0).applyAxisAngle(
+        new Vector3(0, 0, 1), angle)
+}
+
+function closestAngleTo(origin: Vector3, vector: Vector3) {
+    return new Vector3(0, 1, 0).angleTo(vector)
+}
+export { getCentre, getBoundingHit, getBoundingPlane, calcTurnFactor, getVisibleBoids, getForwardVector }
