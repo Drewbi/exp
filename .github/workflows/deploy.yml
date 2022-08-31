@@ -23,10 +23,10 @@ jobs:
       - name: Build Distribution
         run: yarn build
         
-      - name: Archive production artifacts
+      - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: dist
+          name: github-pages
           path: dist
 
   deploy:
