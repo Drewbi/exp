@@ -7,7 +7,8 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 main: resolve(__dirname, 'index.html'),
-                boi: resolve(__dirname, '_/boi.html')
+                boi: resolve(__dirname, '_/boi.html'),
+                dots: resolve(__dirname, '_/dots.html')
             }
         }
     }
