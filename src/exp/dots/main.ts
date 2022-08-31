@@ -63,9 +63,9 @@ document.body.appendChild( renderer.domElement )
 const controls = new OrbitControls( camera, renderer.domElement )
 controls.enableDamping = true
 controls.dampingFactor = 0.2
+controls.autoRotate = true
+controls.autoRotateSpeed = 0.1
 
-//controls.update() must be called after any manual changes to the camera's transform
-// camera.position.set( 0, 20, 100 )
 controls.update()
 
 function animate() {
