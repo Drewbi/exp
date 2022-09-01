@@ -1,72 +1,95 @@
-import { SphereGeometry, PointsMaterial, Mesh, PerspectiveCamera, Scene, WebGLRenderer, BoxGeometry, MeshBasicMaterial, OrthographicCamera, Group, BufferAttribute, BufferGeometry, Line, LineBasicMaterial } from 'three'
-import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
+import {
+    SphereGeometry,
+    PointsMaterial,
+    Mesh,
+    PerspectiveCamera,
+    Scene,
+    WebGLRenderer,
+    Group,
+    Vector2,
+    InstancedMesh,
+    Object3D
+} from 'three'
+import Stats from 'three/examples/jsm/libs/stats.module.js'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { EXP_SIZE } from '../../utils/map'
 import '../../utils/style.css'
 
-export const scene = new Scene()
+let scene: Scene
+let controls: OrbitControls
+let stats: Stats
+let composer: EffectComposer
+let dots: InstancedMesh
 
-const dotGeo = new SphereGeometry(2)
-const dotMat = new PointsMaterial( { color: '#3dbceb' } )
+const transform = new Object3D()
 const resolution = 20
 const MAX_ANGLE = 2 * Math.PI
-let step = 0
-const dots = new Group()
-for(let i = 0; i <= resolution; i++) {
-    for(let j = 0; j <= resolution; j++) {
-        for(let k = 0; k <= resolution; k++) {
-            const dot = new Mesh(dotGeo, dotMat)
-            dot.position.x = Math.sin((MAX_ANGLE / resolution) * j + k) * 100 / i
-            dot.position.y = Math.cos((MAX_ANGLE / resolution) * j + k) * 100 / i
-            dot.position.z = Math.tan((MAX_ANGLE / resolution) * j + k) * 100 / i
-            dots.add(dot)
-        }
+const MAX_DOTS = Math.pow(resolution, 3)
+
+init()
+animate()
+
+function init() {
+    const container = document.getElementById( 'container' )
+
+    scene = new Scene()
+
+    const dotGeo = new SphereGeometry(2)
+    const dotMat = new PointsMaterial( { color: '#3dbceb' } )
+    const step = 0
+    dots = new InstancedMesh(dotGeo, dotMat, MAX_DOTS)
+
+    scene.add(dots)
+
+    updateDotPos()
+
+    const starGeo = new SphereGeometry(2)
+    const starMat = new PointsMaterial( { color: '#fff' } )
+
+    const NUM_STARS = 1000
+    const starMesh = new InstancedMesh(starGeo, starMat, NUM_STARS)
+    scene.add(starMesh)
+
+    const STAR_RANGE = 5000
+    for(let i = 0; i < NUM_STARS; i ++) {
+        transform.position.x = (Math.random() * STAR_RANGE) - STAR_RANGE / 2
+        transform.position.y = (Math.random() * STAR_RANGE) - STAR_RANGE / 2
+        transform.position.z = (Math.random() * STAR_RANGE) - STAR_RANGE / 2
+        transform.updateMatrix()
+        starMesh.setMatrixAt( i ++, transform.matrix )
     }
+    starMesh.instanceMatrix.needsUpdate = true
+
+    const camera = new PerspectiveCamera( 45, EXP_SIZE / EXP_SIZE, 1, 10000 )
+    camera.position.z = EXP_SIZE
+
+    const renderer = new WebGLRenderer({ antialias: true })
+    renderer.setSize( EXP_SIZE, EXP_SIZE )
+    container?.appendChild( renderer.domElement )
+
+    stats = Stats()
+    container?.appendChild( stats.dom )
+
+    controls = new OrbitControls( camera, renderer.domElement )
+    controls.enableDamping = true
+    controls.dampingFactor = 0.2
+    controls.autoRotate = true
+    controls.autoRotateSpeed = 0.1
+
+    controls.update()
+
+    const renderScene = new RenderPass( scene, camera )
+
+    const bloomPass = new UnrealBloomPass( new Vector2( EXP_SIZE, EXP_SIZE ), 1.5, 0.7, 0 )
+
+    composer = new EffectComposer( renderer )
+    composer.addPass( renderScene )
+    composer.addPass( bloomPass )
+
 }
-
-scene.add(dots)
-
-function updateDotPos() {
-    step = (step + 1) % resolution
-    for(let i = 0; i <= resolution; i++) {
-        for(let j = 0; j <= resolution; j++) {
-            for(let k = 0; k <= resolution; k++) {
-                const dot = dots.children[i + j + k]
-                // console.log(i + j + k)
-                dot.position.x = 0
-                dot.position.y = 0
-                dot.position.z = 0
-            }
-        }
-    }
-}
-
-const starGeo = new SphereGeometry(2)
-const starMat = new PointsMaterial( { color: '#fff' } )
-
-const NUM_STARS = 1000
-const STAR_RANGE = 10000
-for(let i = 0; i < NUM_STARS; i ++) {
-    const star = new Mesh(starGeo, starMat)
-    star.position.x = (Math.random() * STAR_RANGE) - STAR_RANGE / 2
-    star.position.y = (Math.random() * STAR_RANGE) - STAR_RANGE / 2
-    star.position.z = (Math.random() * STAR_RANGE) - STAR_RANGE / 2
-    scene.add(star)
-}
-
-const camera = new PerspectiveCamera( 45, EXP_SIZE / EXP_SIZE, 1, 10000 )
-camera.position.z = EXP_SIZE
-
-const renderer = new WebGLRenderer({ antialias: true })
-renderer.setSize( EXP_SIZE, EXP_SIZE )
-document.body.appendChild( renderer.domElement )
-
-const controls = new OrbitControls( camera, renderer.domElement )
-controls.enableDamping = true
-controls.dampingFactor = 0.2
-controls.autoRotate = true
-controls.autoRotateSpeed = 0.1
-
-controls.update()
 
 function animate() {
 
@@ -75,9 +98,29 @@ function animate() {
     // required if controls.enableDamping or controls.autoRotate are set to true
     controls.update()
 
-    renderer.render( scene, camera )
+    composer.render()
 
-    // updateDotPos()
+    updateDotPos()
+    stats.update()
+
 }
 
-animate()
+function updateDotPos() {
+    if(dots) {
+        const time = Date.now() * 0.00001
+        const step = time % (MAX_ANGLE / resolution)
+        let index = 0
+        for(let i = 0; i <= resolution; i++) {
+            for(let j = 0; j <= resolution; j++) {
+                for(let k = 0; k <= resolution; k++) {
+                    transform.position.x = Math.sin((MAX_ANGLE / resolution) * j + k + step) * 100 / i
+                    transform.position.y = Math.cos((MAX_ANGLE / resolution) * j + k + step) * 100 / i
+                    transform.position.z = Math.tan((MAX_ANGLE / resolution) * j + k + step) * 100 / i
+                    transform.updateMatrix()
+                    dots.setMatrixAt(index ++, transform.matrix)
+                }
+            }
+        }
+        dots.instanceMatrix.needsUpdate = true
+    }
+}

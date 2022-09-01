@@ -7,11 +7,17 @@ body {
     align-items: center;
 }
 
-canvas {
+#container {
     --size: min(1000px, 80vw);
 
     border: #fff 2px solid;
     border-radius: 10px;
-    width: var(--size) !important;
-    height: var(--size) !important;
+    width: var(--size);
+    height: var(--size);
+}
+
+canvas {
+    border-radius: 10px;
+    width: 100% !important;
+    height: 100% !important;
 }
