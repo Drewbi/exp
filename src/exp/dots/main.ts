@@ -28,6 +28,7 @@ const transform = new Object3D()
 const resolution = 20
 const MAX_ANGLE = 2 * Math.PI
 const MAX_DOTS = Math.pow(resolution, 3)
+const showStats = false
 
 init()
 animate()
@@ -39,7 +40,6 @@ function init() {
 
     const dotGeo = new SphereGeometry(2)
     const dotMat = new PointsMaterial( { color: '#3dbceb' } )
-    const step = 0
     dots = new InstancedMesh(dotGeo, dotMat, MAX_DOTS)
 
     scene.add(dots)
@@ -65,13 +65,16 @@ function init() {
 
     const camera = new PerspectiveCamera( 45, EXP_SIZE / EXP_SIZE, 1, 10000 )
     camera.position.z = EXP_SIZE
+    camera.position.y = 20
 
     const renderer = new WebGLRenderer({ antialias: true })
     renderer.setSize( EXP_SIZE, EXP_SIZE )
     container?.appendChild( renderer.domElement )
 
-    stats = Stats()
-    container?.appendChild( stats.dom )
+    if(showStats) {
+        stats = Stats()
+        container?.appendChild( stats.dom )
+    }
 
     controls = new OrbitControls( camera, renderer.domElement )
     controls.enableDamping = true
@@ -101,7 +104,7 @@ function animate() {
     composer.render()
 
     updateDotPos()
-    stats.update()
+    if(showStats) stats.update()
 
 }
 
