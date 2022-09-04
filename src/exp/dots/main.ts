@@ -1,11 +1,9 @@
 import {
     SphereGeometry,
     PointsMaterial,
-    Mesh,
     PerspectiveCamera,
     Scene,
     WebGLRenderer,
-    Group,
     Vector2,
     InstancedMesh,
     Object3D
@@ -25,7 +23,7 @@ let composer: EffectComposer
 let dots: InstancedMesh
 
 const transform = new Object3D()
-const resolution = 20
+const resolution = 16
 const MAX_ANGLE = 2 * Math.PI
 const MAX_DOTS = Math.pow(resolution, 3)
 const showStats = false
@@ -95,17 +93,11 @@ function init() {
 }
 
 function animate() {
-
     requestAnimationFrame( animate )
-
-    // required if controls.enableDamping or controls.autoRotate are set to true
     controls.update()
-
     composer.render()
-
     updateDotPos()
     if(showStats) stats.update()
-
 }
 
 function updateDotPos() {
