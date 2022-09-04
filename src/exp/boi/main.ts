@@ -14,11 +14,6 @@ import { BOUNDS_MARGIN, EXP_SIZE } from '../../utils/map'
 
 export const scene = new Scene()
 
-// const bgplane = new PlaneGeometry(EXP_SIZE, EXP_SIZE)
-// const bgmaterial = new MeshBasicMaterial({ color: '#080808'})
-// const bg = new Mesh( bgplane, bgmaterial )
-// scene.add( bg )
-
 const wallplane = new PlaneGeometry(EXP_SIZE, 2)
 const wallmaterial = new MeshBasicMaterial(
     { color: '#0099ff', side: DoubleSide}
@@ -62,11 +57,14 @@ const createBoids = (numBoids: number) => {
     }
     return boids
 }
-// export const boids = createBoids(10)
-export const boids = [
-    new Boid(500, 600, Math.PI + 0.1),
-    new Boid(500, 400, -0.1)
-]
+export const boids = createBoids(50)
+// export const boids = [
+//     new Boid(500, 600, Math.PI + 0.1),
+//     new Boid(500, 400, -0.1)
+// ]
+// export const boids = [
+//     new Boid(500, 60, Math.PI)
+// ]
 boids.forEach(boid => scene.add( boid.mesh ))
 boids.forEach(boid => boid.updateBoid() )
 

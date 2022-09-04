@@ -1,13 +1,30 @@
-import { CylinderGeometry, MeshBasicMaterial, Mesh, Vector3, SphereGeometry, PointsMaterial, Quaternion } from 'three'
+import {
+    CylinderGeometry,
+    MeshBasicMaterial,
+    Mesh,
+    Vector3,
+    SphereGeometry,
+    PointsMaterial,
+    Quaternion
+} from 'three'
+import { BOUNDS, BOUNDS_MARGIN } from '../../utils/map'
 import { boids, scene } from './main'
-import { calcTurnFactor, getForwardVector, getVisibleBoids } from './utils'
+import {
+    calcTurnDirectionV2,
+    calcTurnFactor,
+    calcTurnFactorV2,
+    getForwardVector,
+    getVisibleBoids
+} from './utils'
 export class Boid {
     geometry: CylinderGeometry
     material: MeshBasicMaterial
     mesh: Mesh
     speed: number
     cenDot: Mesh
-    groupingFactor: number
+
+    groupingFactor = 0.05
+    sightRange = 80
 
     constructor(initialX: number, initialY: number, initialRotation: number) {
         this.geometry = new CylinderGeometry(0, 10, 20, 3, 1)
@@ -24,18 +41,19 @@ export class Boid {
         this.cenDot = dot
         scene.add(dot)
 
-        this.groupingFactor = 0.05
+        
     }
 
     updateBoid() {
         this.flyTowardsCentre()
+        this.avoidOthers()
         this.avoidWalls()
         const forward = getForwardVector(this.mesh.rotation.z).multiplyScalar(this.speed)
         this.mesh.position.add(forward)
     }
 
     flyTowardsCentre() {
-        const visiBoids = getVisibleBoids(this, boids, 300)
+        const visiBoids = getVisibleBoids(this, boids, this.sightRange)
         if (visiBoids && visiBoids.length > 0) {
             const centre = visiBoids.reduce((prev: Vector3, curr: Boid) => {
                 return prev.clone().add(curr.mesh.position)
@@ -44,6 +62,25 @@ export class Boid {
             const forward = getForwardVector(this.mesh.rotation.z)
             const vectorToCentre = centre.sub(this.mesh.position).normalize()
             const angleOfTurn = vectorToCentre.angleTo(forward)
+                * calcTurnDirectionV2(vectorToCentre, this.mesh.rotation)
+            const endRotation = new Quaternion().setFromAxisAngle(
+                new Vector3(0, 0, 1), angleOfTurn)
+            const nextRotation = new Quaternion().rotateTowards(endRotation, this.groupingFactor)
+            this.mesh.applyQuaternion(nextRotation) 
+        }
+    }
+
+    flyTowardsCentreV2() {
+        const visiBoids = getVisibleBoids(this, boids, this.sightRange)
+        if (visiBoids && visiBoids.length > 0) {
+            const centre = visiBoids.reduce((prev: Vector3, curr: Boid) => {
+                return prev.clone().add(curr.mesh.position)
+            }, new Vector3(0, 0, 0)).divideScalar(visiBoids.length)
+            this.cenDot.position.set(centre.x, centre.y, centre.z)
+            const forward = getForwardVector(this.mesh.rotation.z)
+            const vectorToCentre = centre.sub(this.mesh.position).normalize()
+            const angleOfTurn = vectorToCentre.angleTo(forward)
+                * calcTurnDirectionV2(vectorToCentre, this.mesh.rotation)
             const endRotation = new Quaternion().setFromAxisAngle(
                 new Vector3(0, 0, 1), angleOfTurn)
             const nextRotation = new Quaternion().rotateTowards(endRotation, this.groupingFactor)
@@ -52,9 +89,30 @@ export class Boid {
     }
 
     avoidWalls() {
-        const turnFactor = calcTurnFactor(this.mesh.position, this.mesh.rotation)
+        const wallPoints = BOUNDS.map(bound => {
+            const targetPoint = new Vector3()
+            if(bound.axis === 'x') {
+                targetPoint.x = this.mesh.position.x
+                targetPoint.y = bound.offset
+            } else {
+                targetPoint.y = this.mesh.position.y
+                targetPoint.x = bound.offset
+            }
+            return targetPoint
+        })
+        const turnFactor = calcTurnFactorV2(wallPoints, this.mesh.position, this.mesh.rotation, BOUNDS_MARGIN)
         this.mesh.rotation.z += turnFactor
     }
+
+    avoidOthers() {
+        const visiBoidsPos = getVisibleBoids(this, boids, this.sightRange).map(boid => boid.mesh.position)
+        if (visiBoidsPos && visiBoidsPos.length > 0) {
+            const turnFactor = calcTurnFactorV2(visiBoidsPos, this.mesh.position, this.mesh.rotation, 80)
+            this.mesh.rotation.z += turnFactor
+        }
+    }
+
+
 }
 
 export default Boid
