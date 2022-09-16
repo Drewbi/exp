@@ -10,7 +10,8 @@ export default defineConfig({
             input: {
                 main: resolve(__dirname, 'index.html'),
                 boi: resolve(__dirname, '_/boi.html'),
-                dots: resolve(__dirname, '_/dots.html')
+                dots: resolve(__dirname, '_/dots.html'),
+                frag: resolve(__dirname, '_/frag.html')
             }
         }
     }
