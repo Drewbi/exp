@@ -14,7 +14,8 @@
         "sourceType": "module"
     },
     "plugins": [
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "glsl"
     ],
     "rules": {
         "indent": [

@@ -1,8 +1,10 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
+import glsl from 'vite-plugin-glsl';
 
 export default defineConfig({
     base: '/exp/',
+    plugins: [glsl()],
     build: {
         rollupOptions: {
             input: {
