@@ -8,65 +8,73 @@ import {
     Vector3,
     Group,
     DoubleSide} from 'three'
-import './style.css'
+import '../../utils/style.css'
 import Boid from './boid'
 import { BOUNDS_MARGIN, EXP_SIZE } from '../../utils/map'
 
-export const scene = new Scene()
+export let scene: Scene
+export let boids: Boid[]
+let renderer: WebGLRenderer
+let camera: OrthographicCamera
 
-const wallplane = new PlaneGeometry(EXP_SIZE, 2)
-const wallmaterial = new MeshBasicMaterial(
-    { color: '#0099ff', side: DoubleSide}
-)
-const walls = new Group()
-for(let i = 0; i < 4; i++) {
-    const wall = new Mesh( wallplane, wallmaterial )
-    const positions = [
-        { rotationAxis: new Vector3(0, 0, 0), xpos: EXP_SIZE / 2, ypos: 0  + BOUNDS_MARGIN },
-        { rotationAxis: new Vector3(0, 0, 1), xpos: EXP_SIZE - BOUNDS_MARGIN, ypos: EXP_SIZE / 2 },
-        { rotationAxis: new Vector3(0, 0, 0), xpos: EXP_SIZE / 2, ypos: EXP_SIZE - BOUNDS_MARGIN },
-        { rotationAxis: new Vector3(0, 0, 1), xpos: 0 + BOUNDS_MARGIN, ypos: EXP_SIZE / 2 },
-    ]
-    wall.position.z = 0
-    wall.position.x = positions[i].xpos
-    wall.position.y = positions[i].ypos
-    wall.rotateOnAxis(positions[i].rotationAxis, Math.PI / 2 )
-    walls.add(wall)
-}
-walls.name = 'walls'
-scene.add( walls )
+function init() {
+    scene = new Scene()
+    // const wallplane = new PlaneGeometry(EXP_SIZE, 2)
+    // const wallmaterial = new MeshBasicMaterial(
+    //     { color: '#0099ff', side: DoubleSide}
+    // )
+    // const walls = new Group()
+    // for(let i = 0; i < 4; i++) {
+    //     const wall = new Mesh( wallplane, wallmaterial )
+    //     const positions = [
+    //         { rotationAxis: new Vector3(0, 0, 0), xpos: EXP_SIZE / 2, ypos: 0  + BOUNDS_MARGIN },
+    //         { rotationAxis: new Vector3(0, 0, 1), xpos: EXP_SIZE - BOUNDS_MARGIN, ypos: EXP_SIZE / 2 },
+    //         { rotationAxis: new Vector3(0, 0, 0), xpos: EXP_SIZE / 2, ypos: EXP_SIZE - BOUNDS_MARGIN },
+    //         { rotationAxis: new Vector3(0, 0, 1), xpos: 0 + BOUNDS_MARGIN, ypos: EXP_SIZE / 2 },
+    //     ]
+    //     wall.position.z = 0
+    //     wall.position.x = positions[i].xpos
+    //     wall.position.y = positions[i].ypos
+    //     wall.rotateOnAxis(positions[i].rotationAxis, Math.PI / 2 )
+    //     walls.add(wall)
+    // }
+    // walls.name = 'walls'
+    // scene.add( walls )
 
-const camera = new OrthographicCamera(
-    0, EXP_SIZE,
-    0, EXP_SIZE,
-    -100, 100
-)
-camera.zoom = 1
+    camera = new OrthographicCamera(
+        0, EXP_SIZE,
+        0, EXP_SIZE,
+        -100, 100
+    )
+    camera.zoom = 1
 
-const renderer = new WebGLRenderer({ antialias: true })
-renderer.setSize( EXP_SIZE, EXP_SIZE )
-document.body.appendChild( renderer.domElement )
+    renderer = new WebGLRenderer({ antialias: true })
+    renderer.setSize( EXP_SIZE, EXP_SIZE )
+    const container = document.getElementById( 'container' )
+    container?.appendChild( renderer.domElement )
 
-const createBoids = (numBoids: number) => {
-    const boids: Boid[] = []
-    for(let i = 0; i < numBoids; i++) {
-        boids.push(new Boid(
-            Math.random() * EXP_SIZE,
-            Math.random() * EXP_SIZE, Math.random() * (2 * Math.PI))
-        )
+    const createBoids = (numBoids: number) => {
+        const boids: Boid[] = []
+        for(let i = 0; i < numBoids; i++) {
+            boids.push(new Boid(
+                Math.random() * EXP_SIZE,
+                Math.random() * EXP_SIZE, Math.random() * (2 * Math.PI))
+            )
+        }
+        return boids
     }
-    return boids
+    boids = createBoids(25)
+    // export const boids = [
+    //     new Boid(500, 600, Math.PI + 0.1),
+    //     new Boid(500, 400, -0.1)
+    // ]
+    // export const boids = [
+    //     new Boid(500, 60, Math.PI)
+    // ]
+    boids.forEach(boid => scene.add( boid.mesh ))
+    boids.forEach(boid => boid.updateBoid() )
 }
-export const boids = createBoids(50)
-// export const boids = [
-//     new Boid(500, 600, Math.PI + 0.1),
-//     new Boid(500, 400, -0.1)
-// ]
-// export const boids = [
-//     new Boid(500, 60, Math.PI)
-// ]
-boids.forEach(boid => scene.add( boid.mesh ))
-boids.forEach(boid => boid.updateBoid() )
+
 
 function animate() {
     requestAnimationFrame( animate )
@@ -81,4 +89,5 @@ function animate() {
     renderer.render( scene, camera )
 }
 
+init()
 animate()
