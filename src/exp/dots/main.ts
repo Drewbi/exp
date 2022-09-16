@@ -32,7 +32,7 @@ init()
 animate()
 
 function init() {
-    const container = document.getElementById( 'container' )
+    
 
     scene = new Scene()
 
@@ -67,6 +67,7 @@ function init() {
 
     const renderer = new WebGLRenderer({ antialias: true })
     renderer.setSize( EXP_SIZE, EXP_SIZE )
+    const container = document.getElementById( 'container' )
     container?.appendChild( renderer.domElement )
 
     if(showStats) {

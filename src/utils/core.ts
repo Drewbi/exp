@@ -33,8 +33,6 @@ export default class CoreScene {
 
         this.animate()
     }
-
-    
 }
 
 
