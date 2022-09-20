@@ -5,8 +5,8 @@ interface PageConfig {
   link: string
 }
 
-const pages = import.meta.glob('./exp/**/index.ts', { eager: true, import: "default" })
-const modules = Object.values(pages) as PageConfig[]
+const configs = import.meta.glob('../**/config.json', { eager: true })
+const modules = Object.values(configs) as PageConfig[]
 const links = modules.map((page): string => `<a href="${page.link}">${page.title}</a>`)
 const app = document.querySelector<HTMLDivElement>('#app')
 if (app) {
