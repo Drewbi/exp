@@ -1,18 +1,15 @@
-import { resolve } from 'path'
+import { resolve } from 'path';
 import { defineConfig } from 'vite'
+import mpa from 'vite-plugin-mpa';
 import glsl from 'vite-plugin-glsl';
 
+console.log(process.env.NODE_ENV)
 export default defineConfig({
-    base: '/exp/',
-    plugins: [glsl()],
-    build: {
-        rollupOptions: {
-            input: {
-                main: resolve(__dirname, 'index.html'),
-                boi: resolve(__dirname, '_/boi.html'),
-                dots: resolve(__dirname, '_/dots.html'),
-                frag: resolve(__dirname, '_/frag.html')
-            }
-        }
-    }
+    base: process.env.base_url ?? '/',
+    plugins: [
+        mpa({
+            scanDir: 'src/exp',
+        }),
+        glsl()
+    ],
 })
