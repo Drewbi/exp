@@ -27,6 +27,8 @@ jobs:
         run: yarn
       - name: Build Distribution
         run: yarn build
+        env:
+          base_url: '/exp/'
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
