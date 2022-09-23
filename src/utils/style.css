@@ -8,16 +8,15 @@ body {
 }
 
 #container {
-    --size: min(1000px, 80vw);
-
+    overflow: hidden;
     border: #fff 2px solid;
     border-radius: 10px;
+    --size: min(80vw, 80vh);
     width: var(--size);
-    height: var(--size);
+    height:var(--size);
 }
 
 canvas {
-    border-radius: 10px;
     width: 100% !important;
     height: 100% !important;
 }
