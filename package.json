@@ -7,6 +7,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/p5": "^1.4.3",
     "@types/three": "^0.140.0",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
@@ -20,6 +21,7 @@
     "vite-plugin-mpa": "^1.1.4"
   },
   "dependencies": {
+    "p5": "^1.4.2",
     "three": "^0.141.0"
   }
 }
