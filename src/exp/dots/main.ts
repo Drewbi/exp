@@ -23,7 +23,7 @@ let composer: EffectComposer
 let dots: InstancedMesh
 
 const transform = new Object3D()
-const resolution = 16
+const resolution = 19
 const MAX_ANGLE = 2 * Math.PI
 const MAX_DOTS = Math.pow(resolution, 3)
 const showStats = false
@@ -36,7 +36,7 @@ function init() {
 
     scene = new Scene()
 
-    const dotGeo = new SphereGeometry(2)
+    const dotGeo = new SphereGeometry(2, 4, 3)
     const dotMat = new PointsMaterial( { color: '#3dbceb' } )
     dots = new InstancedMesh(dotGeo, dotMat, MAX_DOTS)
 
@@ -44,7 +44,7 @@ function init() {
 
     updateDotPos()
 
-    const starGeo = new SphereGeometry(2)
+    const starGeo = new SphereGeometry(2, 4, 3)
     const starMat = new PointsMaterial( { color: '#fff' } )
 
     const NUM_STARS = 1000
