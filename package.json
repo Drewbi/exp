@@ -21,6 +21,7 @@
     "vite-plugin-mpa": "^1.1.4"
   },
   "dependencies": {
+    "gl-matrix": "^3.4.3",
     "p5": "^1.4.2",
     "three": "^0.141.0"
   }
