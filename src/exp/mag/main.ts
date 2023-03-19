@@ -58,7 +58,7 @@ export default new p5((sketch: p5) => {
     sketch.strokeWeight(1)
     // sketch.strokeWeight(1)
     // drawGrid(sketch)
-    // drawGridVectors(sketch, 0)
+    drawGridVectors(sketch, 0)
     sketch.noStroke()
     sketch.fill(255, 5)
     sketch.rect(0, 0, EXP_SIZE, EXP_SIZE)

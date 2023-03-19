@@ -61,7 +61,7 @@ function drawScene(gl: WebGLRenderingContext, programInfo: any, buffers: any) {
     // and we only want to see objects between 0.1 units
     // and 100 units away from the camera.
 
-    const fieldOfView = (45 * Math.PI) / 180; // in radians
+    const fieldOfView = (40 * Math.PI) / 180; // in radians
     const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
     const zNear = 0.1;
     const zFar = 100.0;
@@ -120,7 +120,7 @@ function drawScene(gl: WebGLRenderingContext, programInfo: any, buffers: any) {
             offset
         );
         gl.enableVertexAttribArray(programInfo.attribLocations.vertexColor);
-      }
+    }
 
     // Tell WebGL to use our program when drawing
 
