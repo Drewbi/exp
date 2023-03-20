@@ -34,6 +34,9 @@
             "error",
             "never"
         ],
-        "max-len": ["warn", 110]
+        "max-len": [
+            "warn",
+            110
+        ]
     }
 }
