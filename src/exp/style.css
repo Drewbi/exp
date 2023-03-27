@@ -20,3 +20,18 @@ canvas {
     width: 100% !important;
     height: 100% !important;
 }
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+a {
+    position: relative;
+    top: -100px;
+}

@@ -1,22 +1,11 @@
-import { Euler, MathUtils, Matrix4, Vector3 } from 'three'
+import { Euler, MathUtils, Matrix4, Mesh, Vector3 } from 'three'
 import { setInverseRotationMatrix } from '../../utils/matrix'
-import Boid from './boid'
 
 function getCentre(points: Vector3[]) {
     return points.reduce(
         (acc, curr) => acc.add(curr)
     ).divideScalar(points.length)
 }
-
-
-
-// function turnAwayFactor() {
-
-// }
-
-// function turnToFactor() {
-
-// }
 
 function calcTurnFactorV2(targets: Vector3[], position: Vector3, rotation: Euler, margin: number, harshness: number) {
     return targets.reduce((prev, curr) => {
@@ -38,44 +27,6 @@ function calcTurnFactorV2(targets: Vector3[], position: Vector3, rotation: Euler
     }, 0)
 }
 
-// function calcTurnFactor(position: Vector3, rotation: Euler) {
-//     return BOUNDS.reduce((prev, curr) => {
-//         const distanceToEdge = Math.abs(curr.offset - position[curr.axis])
-//         if (distanceToEdge < BOUNDS_MARGIN) {
-
-//             const forward = new Vector3(0, 1, 0).applyAxisAngle(
-//                 new Vector3(0, 0, 1), rotation.z)
-
-//             const normalisedAngle = forward.angleTo(curr.normal)
-
-//             const turnToNormal = normalisedAngle
-
-//             const distanceFactor = 1 - MathUtils.smoothstep(distanceToEdge, 0, BOUNDS_MARGIN)
-
-//             return calcTurnDirectionV2(curr.normal, rotation) * MathUtils.lerp(prev, turnToNormal, distanceFactor)
-//                 + prev
-//         }
-//         return prev
-//     }, 0)
-// }
-
-// function calcTurnDirection(bound: Boundary, rotation: Euler): 1 | -1 {
-//     const normalisedRotation = ((rotation.z % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI)
-//     if (bound.axis === 'x') {
-//         if (normalisedRotation < Math.PI / 2 || normalisedRotation > (Math.PI / 2) * 3) {
-//             return bound.normal[bound.axis] < 0 ? 1 : -1
-//         }
-//         return bound.normal[bound.axis] < 0 ? -1 : 1
-//     }
-//     if (bound.axis === 'y') {
-//         if (normalisedRotation < Math.PI) {
-//             return bound.normal[bound.axis] < 0 ? 1 : -1
-//         }
-//         return bound.normal[bound.axis] < 0 ? -1 : 1
-//     }
-//     return 1
-// }
-
 function calcTurnDirectionV2(targetVector: Vector3, currentRotation: Euler) {
     const unRotate = new Matrix4()
     setInverseRotationMatrix(unRotate, currentRotation.z)
@@ -83,14 +34,14 @@ function calcTurnDirectionV2(targetVector: Vector3, currentRotation: Euler) {
     return unRotatedVector.x > 0 ? -1 : 1
 }
 
-function getVisibleBoids(boid: Boid, allBoids: Boid[], range: number, fov: number): Boid[] {
+function getVisibleBoids(boid: Mesh, allBoids: Mesh[], range: number, fov: number): Mesh[] {
     const forward = new Vector3(0, 1, 0).applyAxisAngle(
-        new Vector3(0, 0, 1), boid.mesh.rotation.z)
+        new Vector3(0, 0, 1), boid.rotation.z)
 
     return allBoids.filter(testBoid => {
-        const towardTarget = testBoid.mesh.position.clone().sub(boid.mesh.position)
+        const towardTarget = testBoid.position.clone().sub(boid.position)
         return testBoid !== boid
-        && boid.mesh.position.distanceTo(testBoid.mesh.position) < range
+        && boid.position.distanceTo(testBoid.position) < range
         && forward.angleTo(towardTarget) < fov
     })
 }

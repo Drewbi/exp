@@ -5,6 +5,9 @@ import {
 
 import Base from './base';
 import Error from './error';
+import { Exp } from './exp';
+import Tets from './exp/tets';
+import Boids from './exp/boi';
 
 const router = createBrowserRouter([
     {
@@ -13,10 +16,18 @@ const router = createBrowserRouter([
         errorElement: <Error />,
         children: [
             {
-              path: "/exp",
-              element: <Contact />,
+                path: "/exp",
+                element: <Exp />,
             },
-          ],
+            {
+                path: "/exp/tets",
+                element: <Tets />
+            },
+            {
+                path: "/exp/boids",
+                element: <Boids />
+            },
+        ],
     }
 ])
 
