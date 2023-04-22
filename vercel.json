@@ -1,5 +1,6 @@
 {
-    "redirects": [
-        { "source": "/test", "destination": "/index.html" }
-    ]
+    "rewrites": [
+        { "source": "/*", "destination": "/" }
+    ],
+    "trailingSlash": false
 }
