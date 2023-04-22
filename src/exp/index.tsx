@@ -3,6 +3,7 @@ import "./style.css"
 
 import Tets from "./tets"
 import Boids from "./boi"
+import Anem from "./anem"
 
 export const config = [
     {
@@ -14,6 +15,11 @@ export const config = [
         name: "Boid(s)",
         path: "boids",
         element: <Boids />
+    },
+    {
+        name: "Anem(one)",
+        path: "anem",
+        element: <Anem />
     }
 ]
 

@@ -8,6 +8,7 @@ import Error from './error';
 import { Exp } from './exp';
 import Tets from './exp/tets';
 import Boids from './exp/boi';
+import Anem from './exp/anem';
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: "/exp/boids",
                 element: <Boids />
+            },
+            {
+                path: "/exp/anem",
+                element: <Anem />
             },
         ],
     }
