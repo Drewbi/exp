@@ -1,3 +1,5 @@
 {
-
+    "redirects": [
+        { "source": "/test", "destination": "/index.html" }
+    ]
 }
