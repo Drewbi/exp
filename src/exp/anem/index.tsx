@@ -20,13 +20,14 @@ interface Dot {
     colour: Colour,
     dead: boolean
 }
-const dots: Dot[] = []
+
+let dots: Dot[] = []
 
 function initDots(number: number) {
     for (let i = 0; i < number; i++) {
         const colour: Colour = { r: 1, g: 2, b: 3 }
         const dot: Dot = { pos: new Vector(0, 0), velocity: new Vector(1, 0), colour, dead: false }
-        dot.pos = getRandomStart()
+        dot.pos = getInitStart()
         dots.push(dot)
     }
 }
@@ -75,6 +76,7 @@ function drawGridVectors(p5: P5CanvasInstance, offset: number) {
 }
 
 const setup = (p5: P5CanvasInstance) => () => {
+    dots = []
     p5.createCanvas(EXP_SIZE, EXP_SIZE)
     p5.background(0)
 
@@ -83,9 +85,8 @@ const setup = (p5: P5CanvasInstance) => () => {
 
 const draw = (p5: P5CanvasInstance) => () => {
     p5.blendMode(p5.ADD)
-    p5.stroke(0, 0, 0)
-    p5.strokeWeight(1)
-    p5.strokeWeight(1)
+    // p5.stroke(0, 0, 0)
+    // p5.strokeWeight(1)
     // drawGrid(p5)
     // drawGridVectors(p5, 0)
     p5.noStroke()
@@ -102,9 +103,13 @@ const draw = (p5: P5CanvasInstance) => () => {
         const vec = dot.velocity.copy()
         dot.pos.add(vec)
         if (dot.pos.x > EXP_SIZE + SPAWN_OFFSET + 2 || dot.pos.x < -SPAWN_OFFSET - 2 || dot.pos.y > EXP_SIZE + SPAWN_OFFSET + 2 || dot.pos.y < -SPAWN_OFFSET - 2) {
-            dot.dead = true
+            // dot.colour = { r: 0, b: 5, g: 5}
+            // dot.dead = true
             dot.pos = getRandomStart()
         }
+        // dot.colour.r += 0.01
+        // dot.colour.g += 0.1
+        // dot.colour.b += 0.2
         p5.pop()
     })
 
