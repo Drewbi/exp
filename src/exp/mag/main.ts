@@ -1,6 +1,5 @@
 import p5, { Vector } from 'p5'
-import '../../utils/style.css'
-import { EXP_SIZE } from '../../utils/map'
+import { EXP_SIZE } from '../utils/map'
 
 const GRID_SIZE = 100
 const NUM_DOTS = 2000
@@ -15,17 +14,17 @@ const dots: dot[] = []
 const radius = 300
 
 function initDots(number: number) {
-  for(let i = 0; i < number; i ++) {
+  for (let i = 0; i < number; i++) {
     // dots.push({ pos: new Vector(Math.random() * EXP_SIZE, Math.random() * EXP_SIZE), velocity: new Vector(1, 0)})
-    dots.push({ pos: new Vector(Math.random() * EXP_SIZE, Math.random() * EXP_SIZE), velocity: new Vector(1, 0)})
+    dots.push({ pos: new Vector(Math.random() * EXP_SIZE, Math.random() * EXP_SIZE), velocity: new Vector(1, 0) })
   }
 }
 
 function drawGrid(sketch: p5) {
-  for(let i = 0; i < GRID_SIZE; i++) {
+  for (let i = 0; i < GRID_SIZE; i++) {
     const x = Math.floor(EXP_SIZE / GRID_SIZE) * i
     sketch.line(x, 0, x, EXP_SIZE)
-    for(let j = 0; j < GRID_SIZE; j++) {
+    for (let j = 0; j < GRID_SIZE; j++) {
       const y = Math.floor(EXP_SIZE / GRID_SIZE) * j
       sketch.line(0, y, EXP_SIZE, y)
     }
@@ -34,8 +33,8 @@ function drawGrid(sketch: p5) {
 
 function drawGridVectors(sketch: p5, offset: number) {
   let vec = new Vector(1, 1)
-  for(let i = 0; i < GRID_SIZE; i++) {
-    for(let j = 0; j < GRID_SIZE; j++) {
+  for (let i = 0; i < GRID_SIZE; i++) {
+    for (let j = 0; j < GRID_SIZE; j++) {
       const x = Math.floor(EXP_SIZE / GRID_SIZE) * i
       const y = Math.floor(EXP_SIZE / GRID_SIZE) * j
       vec.rotate(sketch.noise(vec.x / NOISE_RESOLUTION, vec.y / NOISE_RESOLUTION) * sketch.TWO_PI)
@@ -44,7 +43,7 @@ function drawGridVectors(sketch: p5, offset: number) {
   }
 }
 
-const container = document.getElementById( 'container' )!
+const container = document.getElementById('container')!
 export default new p5((sketch: p5) => {
   sketch.setup = () => {
     sketch.createCanvas(EXP_SIZE, EXP_SIZE)
@@ -58,7 +57,7 @@ export default new p5((sketch: p5) => {
     sketch.strokeWeight(1)
     // sketch.strokeWeight(1)
     // drawGrid(sketch)
-    drawGridVectors(sketch, 0)
+    // drawGridVectors(sketch, 0)
     sketch.noStroke()
     sketch.fill(255, 5)
     sketch.rect(0, 0, EXP_SIZE, EXP_SIZE)

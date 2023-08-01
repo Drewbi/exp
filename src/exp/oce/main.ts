@@ -1,8 +1,7 @@
 import p5, { Color } from 'p5'
-import '../../utils/style.css'
-import { EXP_SIZE } from '../../utils/map'
+import { EXP_SIZE } from '../utils/map'
 
-const container = document.getElementById( 'container' )!
+const container = document.getElementById('container')!
 
 interface strip {
   height: number

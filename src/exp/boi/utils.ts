@@ -1,5 +1,5 @@
 import { Euler, MathUtils, Matrix4, Vector3 } from 'three'
-import { setInverseRotationMatrix } from '../../utils/matrix'
+import { setInverseRotationMatrix } from '../utils/matrix'
 import Boid from './boid'
 
 function getCentre(points: Vector3[]) {
@@ -90,8 +90,8 @@ function getVisibleBoids(boid: Boid, allBoids: Boid[], range: number, fov: numbe
     return allBoids.filter(testBoid => {
         const towardTarget = testBoid.mesh.position.clone().sub(boid.mesh.position)
         return testBoid !== boid
-        && boid.mesh.position.distanceTo(testBoid.mesh.position) < range
-        && forward.angleTo(towardTarget) < fov
+            && boid.mesh.position.distanceTo(testBoid.mesh.position) < range
+            && forward.angleTo(towardTarget) < fov
     })
 }
 

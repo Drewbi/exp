@@ -1,13 +1,15 @@
 import { mat4 } from 'gl-matrix'
-import '../../utils/style.css'
 import { initBuffers, initShaderProgram } from './utils';
 import vsSource from './shaders/vertex.glsl';
 import fsSource from './shaders/fragment.glsl';
 
 function main() {
-    const canvas = document.querySelector("#glCanvas") as HTMLCanvasElement;
+    const container = document.getElementById("container") as HTMLElement;
+    const canvas = container.appendChild(document.createElement('canvas'))
+    canvas.setAttribute('height', '480')
+    canvas.setAttribute('width', '640')
 
-    if(canvas === null) {
+    if (canvas === null) {
         console.error("Unable to local canvas element");
         return;
     }
@@ -19,7 +21,7 @@ function main() {
         console.error("WebGL is not supported by this browser")
         return;
     }
-    
+
     const shaderProgram = initShaderProgram(gl, vsSource, fsSource);
 
     if (shaderProgram === null) {
@@ -62,7 +64,8 @@ function drawScene(gl: WebGLRenderingContext, programInfo: any, buffers: any) {
     // and 100 units away from the camera.
 
     const fieldOfView = (40 * Math.PI) / 180; // in radians
-    const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
+    const glCanvas = gl.canvas as HTMLCanvasElement;
+    const aspect = glCanvas.clientWidth / glCanvas.clientHeight;
     const zNear = 0.1;
     const zFar = 100.0;
     const projectionMatrix = mat4.create();

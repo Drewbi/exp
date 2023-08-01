@@ -7,7 +7,7 @@ import {
     PointsMaterial,
     Quaternion
 } from 'three'
-import { BOUNDS, BOUNDS_MARGIN } from '../../utils/map'
+import { BOUNDS, BOUNDS_MARGIN } from '../utils/map'
 import { boids, scene } from './main'
 import {
     calcTurnDirectionV2,
@@ -43,7 +43,7 @@ export class Boid {
         // this.cenDot = dot
         // scene.add(dot)
 
-        
+
     }
 
     updateBoid() {
@@ -86,14 +86,14 @@ export class Boid {
             const endRotation = new Quaternion().setFromAxisAngle(
                 new Vector3(0, 0, 1), angleOfTurn)
             const nextRotation = new Quaternion().rotateTowards(endRotation, this.groupingFactor)
-            this.mesh.applyQuaternion(nextRotation) 
+            this.mesh.applyQuaternion(nextRotation)
         }
     }
 
     avoidWalls() {
         const wallPoints = BOUNDS.map(bound => {
             const targetPoint = new Vector3()
-            if(bound.axis === 'x') {
+            if (bound.axis === 'x') {
                 targetPoint.x = this.mesh.position.x
                 targetPoint.y = bound.offset
             } else {
@@ -116,7 +116,7 @@ export class Boid {
 
     wiggleALittle() {
         const leftOrRight = Math.round(Math.random() * 2) - 1
-        const turnFactor = leftOrRight * 0.05 
+        const turnFactor = leftOrRight * 0.05
         this.mesh.rotation.z += turnFactor
     }
 

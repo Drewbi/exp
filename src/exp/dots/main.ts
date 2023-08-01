@@ -13,8 +13,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { EXP_SIZE } from '../../utils/map'
-import '../../utils/style.css'
+import { EXP_SIZE } from '../utils/map'
 
 let scene: Scene
 let controls: OrbitControls
@@ -32,12 +31,12 @@ init()
 animate()
 
 function init() {
-    
+
 
     scene = new Scene()
 
     const dotGeo = new SphereGeometry(2, 4, 3)
-    const dotMat = new PointsMaterial( { color: '#3dbceb' } )
+    const dotMat = new PointsMaterial({ color: '#3dbceb' })
     dots = new InstancedMesh(dotGeo, dotMat, MAX_DOTS)
 
     scene.add(dots)
@@ -45,37 +44,37 @@ function init() {
     updateDotPos()
 
     const starGeo = new SphereGeometry(2, 4, 3)
-    const starMat = new PointsMaterial( { color: '#fff' } )
+    const starMat = new PointsMaterial({ color: '#fff' })
 
     const NUM_STARS = 1000
     const starMesh = new InstancedMesh(starGeo, starMat, NUM_STARS)
     scene.add(starMesh)
 
     const STAR_RANGE = 5000
-    for(let i = 0; i < NUM_STARS; i ++) {
+    for (let i = 0; i < NUM_STARS; i++) {
         transform.position.x = (Math.random() * STAR_RANGE) - STAR_RANGE / 2
         transform.position.y = (Math.random() * STAR_RANGE) - STAR_RANGE / 2
         transform.position.z = (Math.random() * STAR_RANGE) - STAR_RANGE / 2
         transform.updateMatrix()
-        starMesh.setMatrixAt( i ++, transform.matrix )
+        starMesh.setMatrixAt(i++, transform.matrix)
     }
     starMesh.instanceMatrix.needsUpdate = true
 
-    const camera = new PerspectiveCamera( 45, EXP_SIZE / EXP_SIZE, 1, 10000 )
+    const camera = new PerspectiveCamera(45, EXP_SIZE / EXP_SIZE, 1, 10000)
     camera.position.z = EXP_SIZE
     camera.position.y = 20
 
     const renderer = new WebGLRenderer({ antialias: true })
-    renderer.setSize( EXP_SIZE, EXP_SIZE )
-    const container = document.getElementById( 'container' )
-    container?.appendChild( renderer.domElement )
+    renderer.setSize(EXP_SIZE, EXP_SIZE)
+    const container = document.getElementById('container')
+    container?.appendChild(renderer.domElement)
 
-    if(showStats) {
+    if (showStats) {
         stats = Stats()
-        container?.appendChild( stats.dom )
+        container?.appendChild(stats.dom)
     }
 
-    controls = new OrbitControls( camera, renderer.domElement )
+    controls = new OrbitControls(camera, renderer.domElement)
     controls.enableDamping = true
     controls.dampingFactor = 0.2
     controls.autoRotate = true
@@ -83,37 +82,37 @@ function init() {
 
     controls.update()
 
-    const renderScene = new RenderPass( scene, camera )
+    const renderScene = new RenderPass(scene, camera)
 
-    const bloomPass = new UnrealBloomPass( new Vector2( EXP_SIZE, EXP_SIZE ), 1.5, 0.7, 0 )
+    const bloomPass = new UnrealBloomPass(new Vector2(EXP_SIZE, EXP_SIZE), 1.5, 0.7, 0)
 
-    composer = new EffectComposer( renderer )
-    composer.addPass( renderScene )
-    composer.addPass( bloomPass )
+    composer = new EffectComposer(renderer)
+    composer.addPass(renderScene)
+    composer.addPass(bloomPass)
 
 }
 
 function animate() {
-    requestAnimationFrame( animate )
+    requestAnimationFrame(animate)
     controls.update()
     composer.render()
     updateDotPos()
-    if(showStats) stats.update()
+    if (showStats) stats.update()
 }
 
 function updateDotPos() {
-    if(dots) {
+    if (dots) {
         const time = Date.now() * 0.00001
         const step = time % (MAX_ANGLE / resolution)
         let index = 0
-        for(let i = 0; i <= resolution; i++) {
-            for(let j = 0; j <= resolution; j++) {
-                for(let k = 0; k <= resolution; k++) {
+        for (let i = 0; i <= resolution; i++) {
+            for (let j = 0; j <= resolution; j++) {
+                for (let k = 0; k <= resolution; k++) {
                     transform.position.x = Math.sin((MAX_ANGLE / resolution) * j + k + step) * 100 / i
                     transform.position.y = Math.cos((MAX_ANGLE / resolution) * j + k + step) * 100 / i
                     transform.position.z = Math.tan((MAX_ANGLE / resolution) * j + k + step) * 100 / i
                     transform.updateMatrix()
-                    dots.setMatrixAt(index ++, transform.matrix)
+                    dots.setMatrixAt(index++, transform.matrix)
                 }
             }
         }

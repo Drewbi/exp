@@ -7,10 +7,10 @@ import {
     Mesh,
     Vector3,
     Group,
-    DoubleSide} from 'three'
-import '../../utils/style.css'
+    DoubleSide
+} from 'three'
 import Boid from './boid'
-import { BOUNDS_MARGIN, EXP_SIZE } from '../../utils/map'
+import { BOUNDS_MARGIN, EXP_SIZE } from '../utils/map'
 
 export let scene: Scene
 export let boids: Boid[]
@@ -49,13 +49,13 @@ function init() {
     camera.zoom = 1
 
     renderer = new WebGLRenderer({ antialias: true })
-    renderer.setSize( EXP_SIZE, EXP_SIZE )
-    const container = document.getElementById( 'container' )
-    container?.appendChild( renderer.domElement )
+    renderer.setSize(EXP_SIZE, EXP_SIZE)
+    const container = document.getElementById('container')
+    container?.appendChild(renderer.domElement)
 
     const createBoids = (numBoids: number) => {
         const boids: Boid[] = []
-        for(let i = 0; i < numBoids; i++) {
+        for (let i = 0; i < numBoids; i++) {
             boids.push(new Boid(
                 Math.random() * EXP_SIZE,
                 Math.random() * EXP_SIZE, Math.random() * (2 * Math.PI))
@@ -71,14 +71,14 @@ function init() {
     // export const boids = [
     //     new Boid(500, 60, Math.PI)
     // ]
-    boids.forEach(boid => scene.add( boid.mesh ))
-    boids.forEach(boid => boid.updateBoid() )
+    boids.forEach(boid => scene.add(boid.mesh))
+    boids.forEach(boid => boid.updateBoid())
 }
 
 
 function animate() {
-    requestAnimationFrame( animate )
-    boids.forEach(boid => boid.updateBoid() )
+    requestAnimationFrame(animate)
+    boids.forEach(boid => boid.updateBoid())
 
 
     // intersects.forEach(i => i.object.material.color.set(0xff0000))
@@ -86,7 +86,7 @@ function animate() {
     // const { x, y, z } = getCentre(boids.map(boid => boid.mesh.position))
     // dot.position.set(20, 20, 0)
     // boids[0].mesh.rotation.z = 10
-    renderer.render( scene, camera )
+    renderer.render(scene, camera)
 }
 
 init()
