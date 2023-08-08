@@ -1,6 +1,7 @@
 export interface ExpConfig {
     title: string
     link: string
+    wip?: boolean
 }
 
 export const getExpConfigs = (): ExpConfig[] => {

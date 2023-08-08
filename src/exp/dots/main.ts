@@ -14,6 +14,7 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { EXP_SIZE } from '../utils/map'
+import { replaceAllChildren, resizeRendererToDisplaySize } from '../../utils/canvas'
 
 let scene: Scene
 let controls: OrbitControls
@@ -25,14 +26,12 @@ const transform = new Object3D()
 const resolution = 19
 const MAX_ANGLE = 2 * Math.PI
 const MAX_DOTS = Math.pow(resolution, 3)
-const showStats = false
+const showStats = true
 
 init()
 animate()
 
 function init() {
-
-
     scene = new Scene()
 
     const dotGeo = new SphereGeometry(2, 4, 3)
@@ -65,9 +64,12 @@ function init() {
     camera.position.y = 20
 
     const renderer = new WebGLRenderer({ antialias: true })
-    renderer.setSize(EXP_SIZE, EXP_SIZE)
     const container = document.getElementById('container')
-    container?.appendChild(renderer.domElement)
+    if (container) {
+        replaceAllChildren(container, renderer.domElement)
+        const resizeObserver = new ResizeObserver(resizeRendererToDisplaySize(renderer, camera));
+        resizeObserver.observe(container, { box: 'content-box' });
+    }
 
     if (showStats) {
         stats = Stats()
@@ -89,7 +91,6 @@ function init() {
     composer = new EffectComposer(renderer)
     composer.addPass(renderScene)
     composer.addPass(bloomPass)
-
 }
 
 function animate() {

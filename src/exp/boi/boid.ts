@@ -24,9 +24,9 @@ export class Boid {
 
     groupingFactor = 0.05
     sightRange = 120
-    avoidenceRange = 40
+    avoidenceRange = 60
     fieldOfView = Math.PI / 1.4
-    hatred = -50
+    hatred = -10
 
     constructor(initialX: number, initialY: number, initialRotation: number) {
         this.geometry = new CylinderGeometry(0, 10, 20, 3, 1)

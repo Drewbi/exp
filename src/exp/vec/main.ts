@@ -2,17 +2,13 @@ import { mat4 } from 'gl-matrix'
 import { initBuffers, initShaderProgram } from './utils';
 import vsSource from './shaders/vertex.glsl';
 import fsSource from './shaders/fragment.glsl';
+import { replaceAllChildren } from '../../utils/canvas';
 
 function main() {
-    const container = document.getElementById("container") as HTMLElement;
-    const canvas = container.appendChild(document.createElement('canvas'))
-    canvas.setAttribute('height', '480')
-    canvas.setAttribute('width', '640')
+    const container = document.getElementById("container");
+    const canvas = document.createElement('canvas')
+    if (container) replaceAllChildren(container, canvas)
 
-    if (canvas === null) {
-        console.error("Unable to local canvas element");
-        return;
-    }
     // Initialize the GL context
     const gl = canvas.getContext("webgl");
 

@@ -2,8 +2,9 @@ import { getExpConfigs } from "./config"
 
 export const handleRoute = () => {
     const modules = getExpConfigs()
-    console.log(modules)
-    console.log(location.pathname.split('/'))
     const path = location.pathname.split('/')
-    if (path.length > 1 && modules.some(module => path[1] === module.link)) import(`../exp/${path[1]}/main.ts`)
+    if (path.length > 1) {
+        const match = modules.find(module => path[1] === module.link)
+        if (match) import(`../exp/${match.link}/main.ts`)
+    }
 }

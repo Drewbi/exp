@@ -11,6 +11,7 @@ import {
 } from 'three'
 import Boid from './boid'
 import { BOUNDS_MARGIN, EXP_SIZE } from '../utils/map'
+import { replaceAllChildren, resizeRendererToDisplaySize } from '../../utils/canvas'
 
 export let scene: Scene
 export let boids: Boid[]
@@ -49,9 +50,12 @@ function init() {
     camera.zoom = 1
 
     renderer = new WebGLRenderer({ antialias: true })
-    renderer.setSize(EXP_SIZE, EXP_SIZE)
     const container = document.getElementById('container')
-    container?.appendChild(renderer.domElement)
+    if (container) {
+        replaceAllChildren(container, renderer.domElement)
+        const resizeObserver = new ResizeObserver(resizeRendererToDisplaySize(renderer));
+        resizeObserver.observe(container, { box: 'content-box' });
+    }
 
     const createBoids = (numBoids: number) => {
         const boids: Boid[] = []
