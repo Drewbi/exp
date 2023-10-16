@@ -1,10 +1,11 @@
 import { PerspectiveCamera, WebGLRenderer } from "three";
 
 export const resizeRendererToDisplaySize = (renderer: WebGLRenderer, camera?: PerspectiveCamera) => () => {
-    const container = document.getElementById('container')
-    if (container) {
-        const width = container.clientWidth
-        const height = container.clientHeight
+    const canvas = document.getElementsByTagName('canvas')[0]
+    if (canvas) {
+        console.log('test')
+        const width = canvas.clientWidth
+        const height = canvas.clientHeight
 
         renderer.setSize(width, height, false);
 

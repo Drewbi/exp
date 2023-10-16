@@ -63,13 +63,16 @@ function init() {
     camera.position.z = EXP_SIZE
     camera.position.y = 20
 
-    const renderer = new WebGLRenderer({ antialias: true })
+    const renderer = new WebGLRenderer({ antialias: true, })
+
     const container = document.getElementById('container')
     if (container) {
         replaceAllChildren(container, renderer.domElement)
         const resizeObserver = new ResizeObserver(resizeRendererToDisplaySize(renderer, camera));
         resizeObserver.observe(container, { box: 'content-box' });
     }
+    const canvas = document.getElementsByTagName('canvas')[0]
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
 
     if (showStats) {
         stats = Stats()

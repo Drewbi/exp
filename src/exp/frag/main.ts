@@ -21,6 +21,9 @@ function init() {
         resizeObserver.observe(container, { box: 'content-box' });
     }
 
+    const canvas = document.getElementsByTagName('canvas')[0]
+    renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+
     const planeGeo = new PlaneGeometry(100, 100)
 
     const geometry = new BoxGeometry(1, 1, 1)

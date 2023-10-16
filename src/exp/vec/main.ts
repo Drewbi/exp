@@ -9,6 +9,9 @@ function main() {
     const canvas = document.createElement('canvas')
     if (container) replaceAllChildren(container, canvas)
 
+    canvas.setAttribute('width', '1000')
+    canvas.setAttribute('height', '1000')
+
     // Initialize the GL context
     const gl = canvas.getContext("webgl");
 
