@@ -1,16 +1,17 @@
 import { mat4 } from 'gl-matrix'
-import '../../utils/style.css'
 import { initBuffers, initShaderProgram } from './utils';
 import vsSource from './shaders/vertex.glsl';
 import fsSource from './shaders/fragment.glsl';
+import { replaceAllChildren } from '../../utils/canvas';
 
 function main() {
-    const canvas = document.querySelector("#glCanvas") as HTMLCanvasElement;
+    const container = document.getElementById("container");
+    const canvas = document.createElement('canvas')
+    if (container) replaceAllChildren(container, canvas)
 
-    if(canvas === null) {
-        console.error("Unable to local canvas element");
-        return;
-    }
+    canvas.setAttribute('width', '1000')
+    canvas.setAttribute('height', '1000')
+
     // Initialize the GL context
     const gl = canvas.getContext("webgl");
 
@@ -19,7 +20,7 @@ function main() {
         console.error("WebGL is not supported by this browser")
         return;
     }
-    
+
     const shaderProgram = initShaderProgram(gl, vsSource, fsSource);
 
     if (shaderProgram === null) {

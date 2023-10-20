@@ -41,8 +41,8 @@ function getVisibleBoids(boid: Mesh, allBoids: Mesh[], range: number, fov: numbe
     return allBoids.filter(testBoid => {
         const towardTarget = testBoid.position.clone().sub(boid.position)
         return testBoid !== boid
-        && boid.position.distanceTo(testBoid.position) < range
-        && forward.angleTo(towardTarget) < fov
+            && boid.position.distanceTo(testBoid.position) < range
+            && forward.angleTo(towardTarget) < fov
     })
 }
 
