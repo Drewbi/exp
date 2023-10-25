@@ -75,7 +75,7 @@ function init() {
     renderer.setSize(canvas.clientWidth, canvas.clientHeight);
 
     if (showStats) {
-        stats = Stats()
+        stats = new Stats()
         container?.appendChild(stats.dom)
     }
 

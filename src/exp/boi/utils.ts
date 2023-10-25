@@ -1,5 +1,5 @@
 import { Euler, MathUtils, Matrix4, Mesh, Vector3 } from 'three'
-import { setInverseRotationMatrix } from '../../utils/matrix'
+import { setInverseRotationMatrix } from '../utils/matrix'
 
 function getCentre(points: Vector3[]) {
     return points.reduce(

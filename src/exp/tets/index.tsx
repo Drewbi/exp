@@ -37,7 +37,7 @@ function InstancedBoxes({ temp = new THREE.Object3D() }) {
 export default function Tets() {
     return (
         <>
-            <Link to={'/exp'}>Back</Link>
+            <Link to={'/'}>Back</Link>
             <div id="container">
                 <Canvas orthographic>
                     <InstancedBoxes />

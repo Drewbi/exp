@@ -1,38 +1,27 @@
 import {
     createBrowserRouter,
     RouterProvider,
+    RouteObject
 } from 'react-router-dom';
 
 import Base from './base';
 import Error from './error';
-import { Exp } from './exp';
-import Tets from './exp/tets';
-import Boids from './exp/boi';
-import Anem from './exp/anem';
+import Exp, { config } from './nav';
 
 const router = createBrowserRouter([
     {
         path: '/',
+        element: <Exp />,
+        errorElement: <Error />,
+    },  
+    {
+        path: '/',
         element: <Base />,
         errorElement: <Error />,
-        children: [
-            {
-                path: "/exp",
-                element: <Exp />,
-            },
-            {
-                path: "/exp/tets",
-                element: <Tets />
-            },
-            {
-                path: "/exp/boids",
-                element: <Boids />
-            },
-            {
-                path: "/exp/anem",
-                element: <Anem />
-            },
-        ],
+        children: config.map((exp): RouteObject => ({
+            path: exp.path,
+            element: exp.element
+        }))
     }
 ])
 

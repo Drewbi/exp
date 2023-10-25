@@ -7,7 +7,7 @@ import {
     PointsMaterial,
     Quaternion
 } from 'three'
-import { BOUNDS, BOUNDS_MARGIN } from '../../utils/map'
+import { BOUNDS, BOUNDS_MARGIN } from '../utils/map'
 import {
     calcTurnDirectionV2,
     calcTurnFactorV2,
@@ -36,14 +36,14 @@ function flyTowardsCentre(mesh: Mesh) {
         const endRotation = new Quaternion().setFromAxisAngle(
             new Vector3(0, 0, 1), angleOfTurn)
         const nextRotation = new Quaternion().rotateTowards(endRotation, groupingFactor)
-        mesh.applyQuaternion(nextRotation) 
+        mesh.applyQuaternion(nextRotation)
     }
 }
 
 function avoidWalls(mesh: Mesh) {
     const wallPoints = BOUNDS.map(bound => {
         const targetPoint = new Vector3()
-        if(bound.axis === 'x') {
+        if (bound.axis === 'x') {
             targetPoint.x = mesh.position.x
             targetPoint.y = bound.offset
         } else {
@@ -66,7 +66,7 @@ function avoidOthers(mesh: Mesh) {
 
 function wiggleALittle(mesh: Mesh) {
     const leftOrRight = Math.round(Math.random() * 2) - 1
-    const turnFactor = leftOrRight * 0.05 
+    const turnFactor = leftOrRight * 0.05
     mesh.rotation.z += turnFactor
 }
 

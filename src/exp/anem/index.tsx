@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { P5CanvasInstance, ReactP5Wrapper as P5, Sketch } from "react-p5-wrapper";
-import { EXP_SIZE } from '../../utils/map'
+import { P5CanvasInstance, ReactP5Wrapper as P5, Sketch } from "@p5-wrapper/react";
+import { EXP_SIZE } from '../utils/map'
 import { Vector } from "p5";
 
 const GRID_SIZE = 20
@@ -131,7 +131,7 @@ const sketch: Sketch = (p5) => {
 export default function Anem() {
     return (
         <>
-            <Link to={'/exp'}>Back</Link>
+            <Link to={'/'}>Back</Link>
             <P5 sketch={sketch} />
         </>
     )

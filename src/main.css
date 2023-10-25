@@ -1,6 +1,14 @@
-html {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* html {
     width: 100vw;
     height: 100vh;
+}
+
+body {
+    margin: 0;
 }
 
 #root {
@@ -9,7 +17,6 @@ html {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #ccc;
-    margin-top: 60px;
 }
 
 h1 {
@@ -26,4 +33,4 @@ a {
 
 a:hover {
     color: #008888;
-}
+} */

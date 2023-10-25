@@ -8,7 +8,7 @@ export default function Boids() {
     const numBoids = 10
     return (
         <>
-            <Link to={'/exp'}>Back</Link>
+            <Link to={'/'}>Back</Link>
             <div id="container">
                 <Canvas orthographic>
                     {Array.from({ length: numBoids }, (_, i) => (
