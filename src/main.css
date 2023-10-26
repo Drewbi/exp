@@ -2,35 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* html {
+html {
     width: 100vw;
     height: 100vh;
 }
 
-body {
-    margin: 0;
+body, #root {
+    width: 100%;
+    height: 100%;
 }
-
-#root {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #ccc;
-}
-
-h1 {
-    margin-bottom: 50px;
-}
-
-a {
-    font-size: large;
-    font-weight: 600;
-    text-decoration: none;
-    color: #ccc;
-    margin: 40px;
-}
-
-a:hover {
-    color: #008888;
-} */
