@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import { P5CanvasInstance, ReactP5Wrapper as P5, Sketch } from "@p5-wrapper/react";
 import { EXP_SIZE } from '../utils/map'
 import { Vector } from "p5";
+import "../style.css"
 
 const GRID_SIZE = 20
 const NUM_DOTS = 1000
@@ -130,9 +130,6 @@ const sketch: Sketch = (p5) => {
 
 export default function Anem() {
     return (
-        <>
-            <Link to={'/'}>Back</Link>
-            <P5 sketch={sketch} />
-        </>
+        <P5 sketch={sketch} />
     )
 }

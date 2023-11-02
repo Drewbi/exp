@@ -6,7 +6,9 @@ import {
 
 import Error from './layouts/error';
 import Base from './layouts/base';
-import Showcase, { config } from './layouts/showcase';
+import Showcase from './layouts/showcase';
+
+import config from './exp/config';
 
 const router = createBrowserRouter([
     {

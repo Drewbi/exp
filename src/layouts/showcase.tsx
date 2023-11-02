@@ -1,49 +1,7 @@
-import { Link } from "react-router-dom"
-import { useEffect, useRef, useState } from "react"
+import { Link } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
 import * as blurhash from 'blurhash-wasm';
-
-import Tets from "../exp/tets"
-import Boids from "../exp/boi"
-import Anem from "../exp/anem"
-import anemPreview from "../assets/anemprev.png"
-import dotsPreview from "../assets/dotsprev.png"
-import tetsPreview from "../assets/fragprev.png"
-
-interface Config {
-    name?: string,
-    date: Date,
-    path: string,
-    element: JSX.Element,
-    preview: string,
-    previewHash: string,
-}
-
-export const config: Config[] = [
-    {
-        name: "Tet(s)",
-        date: new Date("10/07/2023"),
-        path: "tets",
-        element: <Tets />,
-        preview: tetsPreview,
-        previewHash: "UVAAd|XQ4,raXQfjnQf78^nj-@XQrZf7S|fj"
-    },
-    {
-        name: "Boid(s)",
-        date: new Date("10/07/2023"),
-        path: "boids",
-        element: <Boids />,
-        preview: dotsPreview,
-        previewHash: "U42GKAaKHXj]o}fQV@f6D4kW*0axQ,fQtmj["
-    },
-    {
-        name: "Anem(one)",
-        date: new Date("10/07/2023"),
-        path: "anem",
-        element: <Anem />,
-        preview: anemPreview,
-        previewHash: "UD6mHGyZQ,R4Q,fku5pIR4Q,aKozadadaeR4"
-    }
-]
+import config from '../exp/config'
 
 export default function () {
     return (
@@ -114,10 +72,9 @@ function PreloadImage({ hash, src, alt }: { hash: string, src: string, alt: stri
             <img
                 src={src}
                 alt={alt}
-                className="absolute w-full h-full border-8 border-white transition-opacity duration-500"
+                className="pointer-events-none select-none absolute w-full h-full border-8 border-white transition-opacity duration-500"
                 style={{ opacity: opacity }}
                 onLoad={() => {
-                    console.log('yeet')
                     setOpacity(1)
                 }}
             />

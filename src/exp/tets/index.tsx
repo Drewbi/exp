@@ -2,7 +2,6 @@ import * as THREE from 'three'
 import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { Canvas, useFrame, Vector3 } from '@react-three/fiber'
-import { Link } from 'react-router-dom'
 
 function InstancedBoxes({ temp = new THREE.Object3D() }) {
     const boxSize = 10
@@ -19,7 +18,7 @@ function InstancedBoxes({ temp = new THREE.Object3D() }) {
                 distanceBetween * (i % numSide - centreOffset),
                 distanceBetween * (Math.floor(i / numSide) - centreOffset),
                 -1 * numSide * distanceBetween)
-            temp.rotation.z += 0.1
+            temp.rotation.z += 0.00001
             temp.updateMatrix()
             ref.current.setMatrixAt(i, temp.matrix)
         }
@@ -36,12 +35,8 @@ function InstancedBoxes({ temp = new THREE.Object3D() }) {
 
 export default function Tets() {
     return (
-        <>
-            <div id="container">
-                <Canvas orthographic>
-                    <InstancedBoxes />
-                </Canvas>
-            </div>
-        </>
+        <Canvas orthographic>
+            <InstancedBoxes />
+        </Canvas>
     )
 }
