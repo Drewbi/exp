@@ -2,12 +2,12 @@ import { Link } from "react-router-dom"
 import { useEffect, useRef, useState } from "react"
 import * as blurhash from 'blurhash-wasm';
 
-import Tets from "./exp/tets"
-import Boids from "./exp/boi"
-import Anem from "./exp/anem"
-import anemPreview from "./assets/anemprev.png"
-import dotsPreview from "./assets/dotsprev.png"
-import tetsPreview from "./assets/fragprev.png"
+import Tets from "../exp/tets"
+import Boids from "../exp/boi"
+import Anem from "../exp/anem"
+import anemPreview from "../assets/anemprev.png"
+import dotsPreview from "../assets/dotsprev.png"
+import tetsPreview from "../assets/fragprev.png"
 
 interface Config {
     name?: string,

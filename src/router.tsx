@@ -4,14 +4,14 @@ import {
     RouteObject
 } from 'react-router-dom';
 
-import Base from './base';
-import Error from './error';
-import Nav, { config } from './nav';
+import Error from './layouts/error';
+import Base from './layouts/base';
+import Showcase, { config } from './layouts/showcase';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Nav />,
+        element: <Showcase />,
         errorElement: <Error />,
     },
     {
