@@ -6,14 +6,14 @@ import {
 
 import Base from './base';
 import Error from './error';
-import Exp, { config } from './nav';
+import Nav, { config } from './nav';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Exp />,
+        element: <Nav />,
         errorElement: <Error />,
-    },  
+    },
     {
         path: '/',
         element: <Base />,
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     }
 ])
 
-export default function() {
+export default function () {
     return (
         <RouterProvider router={router} />
     )

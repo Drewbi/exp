@@ -27,17 +27,16 @@ function InstancedBoxes({ temp = new THREE.Object3D() }) {
         ref.current.instanceMatrix.needsUpdate = true
     })
     return (
-    <instancedMesh ref={ref} args={[undefined, undefined, numBoxes]}>
-        <boxGeometry args={[boxSize, boxSize, boxSize]} />
-        <meshBasicMaterial color={'white'} />
-    </instancedMesh>
+        <instancedMesh ref={ref} args={[undefined, undefined, numBoxes]}>
+            <boxGeometry args={[boxSize, boxSize, boxSize]} />
+            <meshBasicMaterial color={'white'} />
+        </instancedMesh>
     )
-  }
+}
 
 export default function Tets() {
     return (
         <>
-            <Link to={'/'}>Back</Link>
             <div id="container">
                 <Canvas orthographic>
                     <InstancedBoxes />
