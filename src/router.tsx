@@ -7,8 +7,10 @@ import {
 import Error from './layouts/error';
 import Base from './layouts/base';
 import Showcase from './layouts/showcase';
+import TestShowcase from './layouts/testshowcase';
 
 import config from './exp/config';
+import testconfig from './test/config'
 
 const router = createBrowserRouter([
     {
@@ -24,6 +26,20 @@ const router = createBrowserRouter([
             path: exp.path,
             element: exp.element
         }))
+    },
+    {
+        path: '/test',
+        element: <TestShowcase />,
+        errorElement: <Error />,
+    },
+    {
+        path: '/test',
+        element: <Base />,
+        errorElement: <Error />,
+        children: testconfig.map(({ path, Element }): RouteObject => ({
+            path: path,
+            element: <Element />
+        })),
     }
 ])
 
