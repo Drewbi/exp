@@ -9,6 +9,7 @@
     },
     "dependencies": {
         "@p5-wrapper/react": "^4.2.0",
+        "@react-three/drei": "^9.88.13",
         "@react-three/fiber": "^8.14.6",
         "blurhash-wasm": "^0.2.0",
         "gl-matrix": "^3.4.3",

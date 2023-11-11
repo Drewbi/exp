@@ -26,8 +26,6 @@ function init() {
         resizeObserver.observe(container, { box: 'content-box' });
     }
 
-    
-
     const planeGeo = new PlaneGeometry(100, 100)
 
     const geometry = new BoxGeometry(1, 1, 1)
