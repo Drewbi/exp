@@ -18,16 +18,18 @@ interface Config {
     element: JSX.Element,
     preview: string,
     previewHash: string,
+    hidden?: boolean,
 }
 
 const config: Config[] = [
     {
         name: "Tet(s)",
-        date: new Date("10/07/2023"),
+        date: new Date("03/27/2023"),
         path: "tets",
         element: <Tets />,
         preview: tetsPreview,
-        previewHash: "U0F$bF%M9F%M-;j[j[ay4nfQj[ay-;j[j[ay"
+        previewHash: "U0F$bF%M9F%M-;j[j[ay4nfQj[ay-;j[j[ay",
+        hidden: true,
     },
     {
         name: "Vec(tor)",
@@ -35,19 +37,20 @@ const config: Config[] = [
         path: "Vec",
         element: <Vecfrag />,
         preview: vecPreview,
-        previewHash: ""
+        previewHash: "",
+        hidden: true,
     },
     {
         name: "Dot(s)",
-        date: new Date("10/07/2023"),
+        date: new Date("09/04/2022"),
         path: "dots",
         element: <Dots />,
         preview: dotsPreview,
-        previewHash: "U42GKAaKHXj]o}fQV@f6D4kW*0axQ,fQtmj["
+        previewHash: "U54e=?Mx4T%hI9tRt8Mx8wfk?wWA%#WBRPtR"
     },
     {
         name: "Mag(net)",
-        date: new Date("10/07/2023"),
+        date: new Date("11/02/2023"),
         path: "mag",
         element: <Mag />,
         preview: magPreview,
@@ -55,7 +58,7 @@ const config: Config[] = [
     },
     {
         name: "Anem(one)",
-        date: new Date("10/07/2023"),
+        date: new Date("09/24/2022"),
         path: "anem",
         element: <Anem />,
         preview: anemPreview,

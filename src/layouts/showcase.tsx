@@ -7,13 +7,19 @@ export default function () {
     return (
         <div className="w-full h-full px-10 py-20">
             <ul className="flex flex-col lg:flex-row lg:h-full relative ">
-                {config.map(e =>
+                {config.filter(exp => !exp.hidden).sort((a, b) => {
+                    return b.date.getTime() - a.date.getTime();
+                }).map(e =>
                     <div key={e.name} className="border-l-8 lg:border-l-0 lg:border-b-8 border-white pb-16 lg:pb-0 lg:pr-16 lg:h-full">
                         <li className="flex relative justify-end lg:h-full">
                             <Link className="flex flex-col w-3/4 lg:w-auto lg:h-3/4" to={e.path}>
                                 <PreloadImage src={e.preview} hash={e.previewHash} alt={"Preview for" + e.name} />
                                 <div className="flex justify-between text-white font-mono">
-                                    <span>{e.date.toDateString()}</span>
+                                    <span>{e.date.toLocaleDateString("en-AU", {
+                                        year: "numeric",
+                                        month: "2-digit",
+                                        day: "2-digit"
+                                    })}</span>
                                     <span>{e.name}</span>
                                 </div>
                             </Link>
