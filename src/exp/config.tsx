@@ -1,15 +1,16 @@
 import Tets from "./tets"
-import Boids from "./boi"
 import Anem from "./anem"
-import Frag from "./vecfrag"
 import Dots from "./dots"
+import Mag from "./mag"
+import Vecfrag from "./vecfrag"
+import Sparkl from "./sprkl"
+
 import anemPreview from "../assets/anemprev.png"
 import dotsPreview from "../assets/dotsprev.png"
 import vecPreview from "../assets/vecprev.png"
 import tetsPreview from "../assets/tetsprev.png"
 import magPreview from "../assets/magprev.png"
-import Mag from "./mag"
-import Vecfrag from "./vecfrag"
+import sprklPreview from "../assets/sprklprev.png"
 
 interface Config {
     name?: string,
@@ -54,7 +55,8 @@ const config: Config[] = [
         path: "mag",
         element: <Mag />,
         preview: magPreview,
-        previewHash: "UD6mHGyZQ,R4Q,fku5pIR4Q,aKozadadaeR4"
+        previewHash: "UD6mHGyZQ,R4Q,fku5pIR4Q,aKozadadaeR4",
+        hidden: true
     },
     {
         name: "Anem(one)",
@@ -63,6 +65,14 @@ const config: Config[] = [
         element: <Anem />,
         preview: anemPreview,
         previewHash: "UD6mHGyZQ,R4Q,fku5pIR4Q,aKozadadaeR4"
+    },
+    {
+        name: "Spark(l)",
+        date: new Date("11/11/2023"),
+        path: "sprkl",
+        element: <Sparkl />,
+        preview: sprklPreview,
+        previewHash: "U038;jj[M{j[offQayfQM{fQt7fQj[fQj[fQ"
     }
 ]
 

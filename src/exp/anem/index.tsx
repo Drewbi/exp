@@ -19,7 +19,7 @@ function initDots(number: number) {
     for (let i = 0; i < number; i++) {
         // dots.push({ pos: new Vector(Math.random() * EXP_SIZE, Math.random() * EXP_SIZE), velocity: new Vector(1, 0)})
         dots.push({
-            pos: new Vector(Math.random() * EXP_SIZE, Math.random() * EXP_SIZE),
+            pos: new Vector((Math.random() * EXP_SIZE + 100) - 50, (Math.random() * EXP_SIZE + 100) - 50),
             velocity: new Vector(1, 0),
             colour: [80, 150 + Math.random() * (254 - 100), 255]
         })
@@ -82,8 +82,8 @@ const draw = (sketch: P5CanvasInstance) => () => {
         const vec = dot.velocity.copy()
         dot.pos.add(vec)
         if (dot.pos.x > EXP_SIZE || dot.pos.x < 0 || dot.pos.y > EXP_SIZE || dot.pos.y < 0) {
-            dot.pos.x = sketch.random(EXP_SIZE)
-            dot.pos.y = sketch.random(EXP_SIZE)
+            dot.pos.x = sketch.random(EXP_SIZE + 100) - 50
+            dot.pos.y = sketch.random(EXP_SIZE + 100) - 50
         }
     })
 }
