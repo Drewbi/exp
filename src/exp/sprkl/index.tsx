@@ -2,6 +2,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import fragmentShader from "./shader/fragment.glsl"
 import { useMemo } from "react";
 import { Uniform, Vector2 } from "three";
+import "../p5wrapper.css"
 
 function Object() {
     const { size } = useThree()

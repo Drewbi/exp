@@ -52,10 +52,10 @@ function drawGridVectors(sketch: P5CanvasInstance, offset: number) {
 let count = 0
 let increaseColor = true
 const setup = (sketch: P5CanvasInstance) => () => {
-        sketch.createCanvas(EXP_SIZE, EXP_SIZE)
-        sketch.background(0, 10, 20)
+    sketch.createCanvas(EXP_SIZE, EXP_SIZE)
+    sketch.background(0, 10, 20)
 
-        initDots(NUM_DOTS)
+    initDots(NUM_DOTS)
 }
 
 const draw = (sketch: P5CanvasInstance) => () => {
