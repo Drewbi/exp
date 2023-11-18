@@ -1,9 +1,10 @@
 uniform float u_time;
+uniform vec2 u_size;
 
 void main(void) {
 
-    vec2 center = vec2(630.0, 630.0);
-    float radius = sin(gl_FragCoord.x) * 400.0;
+    vec2 center = u_size;
+    float radius = sin(gl_FragCoord.x) * u_size.x / 1.2;
     float stroke = 10.0;
     // circle <= xx + yy = radius
 
