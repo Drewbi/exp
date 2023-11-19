@@ -1,7 +1,9 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import fragmentShader from "./shader/fragment.glsl"
+import vertexShader from "../../utils/genericVertex.glsl"
 import { useMemo } from "react";
 import { Uniform, Vector2 } from "three";
+
 
 function Object() {
     const { size } = useThree()
@@ -30,6 +32,7 @@ function Object() {
             <boxGeometry args={[size.width, size.height, 1]} />
             <shaderMaterial
                 fragmentShader={fragmentShader}
+                vertexShader={vertexShader}
                 uniforms={uniforms}
             />
         </mesh>
