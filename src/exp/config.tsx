@@ -4,6 +4,7 @@ import Dots from "./dots"
 import Mag from "./mag"
 import Vecfrag from "./vecfrag"
 import Sparkl from "./sprkl"
+import Gen1 from "./gen/gen1"
 
 import anemPreview from "../assets/anemprev.png"
 import dotsPreview from "../assets/dotsprev.png"
@@ -17,8 +18,8 @@ interface Config {
     date: Date,
     path: string,
     element: JSX.Element,
-    preview: string,
-    previewHash: string,
+    preview?: string,
+    previewHash?: string,
     hidden?: boolean,
 }
 
@@ -73,6 +74,12 @@ const config: Config[] = [
         element: <Sparkl />,
         preview: sprklPreview,
         previewHash: "U038;jj[M{j[offQayfQM{fQt7fQj[fQj[fQ"
+    },
+    {
+        name: "Particles (Gen 1)",
+        date: new Date("1/1/2024"),
+        path: "gen1",
+        element: <Gen1 />,
     }
 ]
 

@@ -3,6 +3,9 @@ import { useEffect, useRef, useState } from 'react'
 import * as blurhash from 'blurhash-wasm';
 import config from '../exp/config'
 
+import defaultPreview from '../assets/defaultprev.png'
+const defaultPreviewHash = 'U78;V?j[00ayD%fQxufQ00ay~qj[_3j[M{j['
+
 export default function () {
     return (
         <div className="w-full h-full px-10 py-20">
@@ -13,7 +16,7 @@ export default function () {
                     <div key={e.name} className="border-l-8 lg:border-l-0 lg:border-b-8 border-white pb-16 lg:pb-0 lg:pr-16 lg:h-full">
                         <li className="flex relative justify-end lg:h-full">
                             <Link className="flex flex-col w-3/4 lg:w-auto lg:h-3/4" to={e.path}>
-                                <PreloadImage src={e.preview} hash={e.previewHash} alt={"Preview for" + e.name} />
+                                <PreloadImage src={e.preview ?? defaultPreview} hash={e.previewHash ?? defaultPreviewHash} alt={"Preview for" + e.name} />
                                 <div className="flex justify-between text-white font-mono">
                                     <span>{e.date.toLocaleDateString("en-AU", {
                                         year: "numeric",
