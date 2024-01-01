@@ -12,6 +12,7 @@ import vecPreview from "../assets/vecprev.png"
 import tetsPreview from "../assets/tetsprev.png"
 import magPreview from "../assets/magprev.png"
 import sprklPreview from "../assets/sprklprev.png"
+import gen1Preview from "../assets/gen1prev.png"
 
 interface Config {
     name?: string,
@@ -80,6 +81,8 @@ const config: Config[] = [
         date: new Date("1/1/2024"),
         path: "gen1",
         element: <Gen1 />,
+        preview: gen1Preview,
+        previewHash: "U07-Zw%M9FofRjWBt7ofD%M{%MM{xuWBt7of"
     }
 ]
 
