@@ -7,18 +7,5 @@ var dir = './src/test/' + id;
 if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
 
-    const content = `
-export default function () {
-    return (
-        <>
-            test
-        </>
-    )
-}
-    `
-
-    fs.appendFile(dir + '/index.tsx', content, function (err) {
-        if (err) throw err;
-        console.log('New test file: ' + id);
-    });
+    fs.cpSync('./src/base/shader', dir, { recursive: true });
 }
