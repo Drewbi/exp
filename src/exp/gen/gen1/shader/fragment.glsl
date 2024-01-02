@@ -14,7 +14,7 @@ float circle(in vec2 st, in float radius){
 }
 
 vec2 offsetTile(vec2 st, float zoom){
-    st *= zoom + (random(st) * sin((u_time / 4.0) - 0.1) * 4.0) + sin(u_time * 0.5) * 20.0;
+    st *= zoom + (random(st) * sin((u_time / 4.0) - 0.1) * 4.0) + sin(u_time * 0.5) * 14.0;
     st.x += step(1.0, mod(st.y, 2.0)) * 0.5;
     return fract(st);
 }
