@@ -14,7 +14,7 @@ float circle(in vec2 st, in float radius){
 }
 
 vec2 offsetTile(vec2 st, float zoom){
-    st *= zoom + (random(st) * sin((u_time / 4.0) - 1.0) * 3.0) + sin(u_time * 0.5) * 2.0;
+    st *= zoom + (random(st) * sin((u_time / 4.0) - 0.1) * 4.0) + sin(u_time * 0.5) * 20.0;
     st.x += step(1.0, mod(st.y, 2.0)) * 0.5;
     return fract(st);
 }
@@ -30,7 +30,7 @@ void main(void) {
     
     st = offsetTile(st, 30.0);
 
-    colour = vec3(circle(st, 0.1));
+    colour = vec3(circle(st, 0.01));
 
     gl_FragColor = vec4(colour, 1.0);
 }
