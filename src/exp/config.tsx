@@ -5,6 +5,7 @@ import Mag from "./mag"
 import Vecfrag from "./vecfrag"
 import Sparkl from "./sprkl"
 import Gen1 from "./gen/gen1"
+import Gen2 from "./gen/gen2"
 
 import anemPreview from "../assets/anemprev.png"
 import dotsPreview from "../assets/dotsprev.png"
@@ -13,6 +14,7 @@ import tetsPreview from "../assets/tetsprev.png"
 import magPreview from "../assets/magprev.png"
 import sprklPreview from "../assets/sprklprev.png"
 import gen1Preview from "../assets/gen1prev.png"
+import palettePreview from "../assets/paletteprev.png"
 
 interface Config {
     name?: string,
@@ -83,6 +85,14 @@ const config: Config[] = [
         element: <Gen1 />,
         preview: gen1Preview,
         previewHash: "U07-Zw%M9FofRjWBt7ofD%M{%MM{xuWBt7of"
+    },
+    {
+        name: "Palette (Gen 2)",
+        date: new Date("2/1/2024"),
+        path: "gen2",
+        element: <Gen2 />,
+        preview: palettePreview,
+        previewHash: "U16b3@:O00Brzm%OGFM]006O?:=y5]D}$*nn"
     }
 ]
 
