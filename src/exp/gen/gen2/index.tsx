@@ -47,6 +47,12 @@ const calcCubePosition = (left: number, right: number, top: number, bot: number,
 const cubes: colourCube[] = []
 
 const addCube = (cube: colourCube) => {
+    const cubeIndex = cubes.findIndex(oldcube => oldcube.position.x === cube.position.x && oldcube.position.y === cube.position.y)
+    if(cubeIndex !== -1) {
+        cubes[cubeIndex] = cube
+        return
+    }
+
     cubes.push(cube)
     if (cube.position.x < viewLeft) viewLeft = cube.position.x
     if (cube.position.x > viewRight) viewRight = cube.position.x
@@ -59,13 +65,14 @@ const drawCube = (sketch: P5CanvasInstance, cube: colourCube) => {
     sketch.fill(cube.colour)
     const cubePos = calcCubePosition(viewLeft, viewRight, viewTop, viewBot, cube.position.x, cube.position.y)
     sketch.square(...cubePos, cubeSize)
-    sketch.fill(255, 255, 255)
+    sketch.noStroke()
+    sketch.fill(100, 0, 20)
 
     const circlePos = [
-        { x: cubePos[0] + cubeSize / 2, y: cubePos[1] - cubeSize / 10, xpos: 0, ypos: -1 },
-        { x: cubePos[0] + cubeSize / 2, y: cubePos[1] + cubeSize + cubeSize / 10, xpos: 0, ypos: 1 },
-        { x: cubePos[0] - cubeSize / 10, y: cubePos[1] + cubeSize / 2, xpos: -1, ypos: 0 },
-        { x: cubePos[0] + cubeSize + cubeSize / 10, y: cubePos[1] + cubeSize / 2, xpos: 1, ypos: 0 },
+        { x: cubePos[0] + cubeSize / 2, y: cubePos[1] - cubeSize / 10, xchange: 0, ychange: -1 },
+        { x: cubePos[0] + cubeSize / 2, y: cubePos[1] + cubeSize + cubeSize / 10, xchange: 0, ychange: 1 },
+        { x: cubePos[0] - cubeSize / 10, y: cubePos[1] + cubeSize / 2, xchange: -1, ychange: 0 },
+        { x: cubePos[0] + cubeSize + cubeSize / 10, y: cubePos[1] + cubeSize / 2, xchange: 1, ychange: 0 },
     ]
 
     const withinBound = (x: number, y: number, mouseX: number | null, mouseY: number | null, margin: number): boolean => {
@@ -74,17 +81,19 @@ const drawCube = (sketch: P5CanvasInstance, cube: colourCube) => {
     }
 
     circlePos.forEach(pos => {
-        sketch.circle(pos.x, pos.y, withinBound(pos.x, pos.y, sketch.mouseX, sketch.mouseY, 10) ? cubeSize / 10 : cubeSize / 20)
-        if(withinBound(pos.x, pos.y, lastClickX, lastClickY, 10)) {
+        sketch.circle(pos.x, pos.y, withinBound(pos.x, pos.y, sketch.mouseX, sketch.mouseY, cubeSize / 16) ? cubeSize / 8 : cubeSize / 16)
+        if(withinBound(pos.x, pos.y, lastClickX, lastClickY, sketch.max(cubeSize / 8, 10))) {
+            const newColour = sketch.color(
+                sketch.random(sketch.hue(cube.colour), sketch.hue(cube.colour) + 40 * pos.xchange), // Hue
+                sketch.random(sketch.saturation(cube.colour), sketch.saturation(cube.colour) + 5 * sketch.random(-1, 1)), // Saturation
+                sketch.random(sketch.lightness(cube.colour), sketch.lightness(cube.colour) + 15 * pos.ychange), // Lightness
+            )
+
             addCube({
-                colour: sketch.color(
-                    sketch.random(sketch.hue(cube.colour), sketch.hue(cube.colour) + 10 * (pos.xpos + pos.ypos)), // Hue
-                    sketch.random(40, 70), // Saturation
-                    sketch.random(60, 80), // Lightness
-                    ),
+                colour: newColour,
                 position: {
-                    x: cube.position.x + pos.xpos, 
-                    y: cube.position.y + pos.ypos
+                    x: cube.position.x + pos.xchange, 
+                    y: cube.position.y + pos.ychange
                 }
             })
 
@@ -96,8 +105,8 @@ const drawCube = (sketch: P5CanvasInstance, cube: colourCube) => {
 
 const setup = (sketch: P5CanvasInstance) => () => {
     sketch.createCanvas(EXP_SIZE, EXP_SIZE)
-    sketch.background(10, 10, 10)
     sketch.colorMode(sketch.HSL, 100)
+    sketch.background(0, 0, 10)
     addCube({
         colour: sketch.color(
             sketch.random(0, 100), // Hue
