@@ -9,7 +9,13 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
     plugins: [
         react(),
-        glsl(),
+        glsl({
+            include: [
+                '**/*.glsl',
+                '**/*.frag',
+                '**/*.vert'
+            ]
+        }),
         wasm(),
         topLevelAwait()
     ],

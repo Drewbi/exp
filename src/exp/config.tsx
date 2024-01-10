@@ -6,6 +6,7 @@ import Vecfrag from "./vecfrag"
 import Sparkl from "./sprkl"
 import Gen1 from "./gen/gen1"
 import Gen2 from "./gen/gen2"
+import Gen3 from "./gen/gen3"
 
 import anemPreview from "../assets/anemprev.png"
 import dotsPreview from "../assets/dotsprev.png"
@@ -88,11 +89,18 @@ const config: Config[] = [
     },
     {
         name: "Palette (Gen 2)",
-        date: new Date("2/1/2024"),
+        date: new Date("1/2/2024"),
         path: "gen2",
         element: <Gen2 />,
         preview: palettePreview,
         previewHash: "U16b3@:O00Brzm%OGFM]006O?:=y5]D}$*nn"
+    },
+    {
+        name: "Frac (Gen 3)",
+        date: new Date("1/9/2024"),
+        path: "gen3",
+        element: <Gen3 />,
+        hidden: true
     }
 ]
 
