@@ -28,4 +28,3 @@ void main(void) {
     gl_FragColor = vec4(vec3(frame(vUv.xy)), 1.0);
 }
 
-
