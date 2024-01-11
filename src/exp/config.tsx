@@ -4,6 +4,7 @@ import Dots from "./dots"
 import Mag from "./mag"
 import Vecfrag from "./vecfrag"
 import Sparkl from "./sprkl"
+import Globe from "./globe"
 import Gen1 from "./gen/gen1"
 import Gen2 from "./gen/gen2"
 import Gen3 from "./gen/gen3"
@@ -14,6 +15,7 @@ import vecPreview from "../assets/vecprev.png"
 import tetsPreview from "../assets/tetsprev.png"
 import magPreview from "../assets/magprev.png"
 import sprklPreview from "../assets/sprklprev.png"
+import globePreview from "../assets/globeprev.png"
 import gen1Preview from "../assets/gen1prev.png"
 import palettePreview from "../assets/paletteprev.png"
 
@@ -78,6 +80,14 @@ const config: Config[] = [
         element: <Sparkl />,
         preview: sprklPreview,
         previewHash: "U038;jj[M{j[offQayfQM{fQt7fQj[fQj[fQ"
+    },
+    {
+        name: "Globe",
+        date: new Date("11/11/2023"),
+        path: "globe",
+        element: <Globe />,
+        preview: globePreview,
+        previewHash: "U3EV-Y0E~h4#tBWDj@azN0WDRmj@tBWDazaz"
     },
     {
         name: "Particles (Gen 1)",
