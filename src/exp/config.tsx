@@ -18,6 +18,7 @@ import sprklPreview from "../assets/sprklprev.png"
 import globePreview from "../assets/globeprev.png"
 import gen1Preview from "../assets/gen1prev.png"
 import palettePreview from "../assets/paletteprev.png"
+import gen3Preview from "../assets/gen3prev.png"
 
 interface Config {
     name?: string,
@@ -106,11 +107,12 @@ const config: Config[] = [
         previewHash: "U16b3@:O00Brzm%OGFM]006O?:=y5]D}$*nn"
     },
     {
-        name: "Frac (Gen 3)",
+        name: "Droste (Gen 3)",
         date: new Date("1/9/2024"),
         path: "gen3",
         element: <Gen3 />,
-        hidden: true
+        preview: gen3Preview,
+        previewHash: "U08;V?j[~qt7xuWBj[ay~qj[00ayxuj[j[of"
     }
 ]
 
