@@ -4,7 +4,7 @@ varying vec2 vUv;
 float frame(vec2 st) {
     float margin = 0.01;
     float center = 0.5;
-    float size = 0.9;
+    float size = fract(u_time / 10.0);
     vec2 st_new = st;
     for(int i = 0; i <= 100; i ++) {
         float dist = distance(st_new, vec2(center));
@@ -25,5 +25,3 @@ float frame(vec2 st) {
 void main(void) {
     gl_FragColor = vec4(vec3(frame(vUv.xy)), 1.0);
 }
-
-
