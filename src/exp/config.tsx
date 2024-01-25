@@ -33,12 +33,11 @@ interface Config {
 const config: Config[] = [
     {
         name: "Tet(s)",
-        date: new Date("03/27/2023"),
+        date: new Date("01/25/2024"),
         path: "tets",
         element: <Tets />,
         preview: tetsPreview,
-        previewHash: "U0F$bF%M9F%M-;j[j[ay4nfQj[ay-;j[j[ay",
-        hidden: true,
+        previewHash: "U39%*Vj[00j[WBfQj[fQ00ay~qfQxufQRjfQ",
     },
     {
         name: "Vec(tor)",

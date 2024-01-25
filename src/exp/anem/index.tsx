@@ -19,7 +19,7 @@ function initDots(number: number) {
     for (let i = 0; i < number; i++) {
         // dots.push({ pos: new Vector(Math.random() * EXP_SIZE, Math.random() * EXP_SIZE), velocity: new Vector(1, 0)})
         dots.push({
-            pos: new Vector((Math.random() * EXP_SIZE + 100) - 50, (Math.random() * EXP_SIZE + 100) - 50),
+            pos: new Vector((Math.random() * EXP_SIZE + 100) - 100, (Math.random() * EXP_SIZE + 100) - 100),
             velocity: new Vector(1, 0),
             colour: [80, 150 + Math.random() * (254 - 100), 255]
         })
