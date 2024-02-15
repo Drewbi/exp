@@ -1,0 +1,18 @@
+/* aspect-square max-w-5xl w-full lg:max-w-none lg:w-auto xl:h-full  */
+#display {
+    aspect-ratio: 1/1;
+}
+
+@media (orientation: landscape) {
+    #display {
+        height: 100%;
+        width: auto;
+    }
+}
+
+@media (orientation: portrait) {
+    #display {
+        width: 100%;
+        height: auto;
+    }
+}

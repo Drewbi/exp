@@ -1,5 +1,6 @@
 import { Link, Outlet } from "react-router-dom";
 import backIcon from "../assets/icons/back.png";
+import "./base.css"
 
 export default function () {
     return (
@@ -7,7 +8,7 @@ export default function () {
             <Link to='..' relative="path" className="absolute top-4 left-4 z-10">
                 <img src={backIcon} className="w-16" />
             </Link>
-            <div className="aspect-square max-w-5xl w-full lg:max-w-none lg:w-auto xl:h-full border-8 border-white">
+            <div id="display" className="border-8 border-white">
                 <Outlet />
             </div>
         </div>
