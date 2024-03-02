@@ -1,12 +1,10 @@
 import { P5CanvasInstance, ReactP5Wrapper as P5, Sketch } from '@p5-wrapper/react'
-import { addSymbol, square, triangle, addArc } from './shapes'
+import { addSymbol } from './shapes'
 
 const setup = (sketch: P5CanvasInstance) => () => {
     sketch.createCanvas(1000, 1000)
     sketch.background(10, 10, 10)
-    addSymbol(sketch, triangle())
-    addSymbol(sketch, square())
-    addArc(sketch)
+    addSymbol(sketch)
 }
 
 const draw = (sketch: P5CanvasInstance) => () => {
@@ -23,4 +21,3 @@ export default function Anem() {
         <P5 sketch={sketch} />
     )
 }
-
