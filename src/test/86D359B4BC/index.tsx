@@ -1,9 +1,9 @@
 import { P5CanvasInstance, ReactP5Wrapper as P5, Sketch } from "@p5-wrapper/react";
-import { generateMap, drawTiles, randomiseColour, processSwitch, startSwitch, randomColourAtPostition } from "./tile";
+import { generateMap, drawTiles, randomiseColour, processSwitch, startSwitch } from "./tile";
 import { numCols, numTiles, size } from "./constants";
 
 const colourMap = generateMap(numTiles)
-const switchMap = generateMap(numTiles)
+let switchMap = generateMap(numTiles)
 
 let lastClickX: number | null = null
 let lastClickY: number | null = null
@@ -24,13 +24,12 @@ const setup = (p5: P5CanvasInstance) => () => {
     p5.background(0)
     p5.noStroke()
     randomiseColour(colourMap)
-    // setInterval(() => processSwitch(switchMap, colourMap), 1000)
+    setInterval(() => switchMap = processSwitch(switchMap, colourMap), 50)
 }
 
 const draw = (p5: P5CanvasInstance) => () => {
     if (lastClickX !== null && lastClickY !== null) {
-        // startSwitch(switchMap, lastClickX, lastClickY)
-        randomColourAtPostition(colourMap, lastClickX, lastClickY)
+        startSwitch(switchMap, colourMap, lastClickX, lastClickY)
         lastClickX = null
         lastClickY = null
     }
