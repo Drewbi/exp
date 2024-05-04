@@ -141,7 +141,8 @@ const config: Config[] = [
         path: "scale",
         element: <Scale />,
         preview: scalePreview,
-        previewHash: "UNIhsxj[00ayt7fQV[fQ00ay_4fRo2fQbFfQ"
+        previewHash: "UNIhsxj[00ayt7fQV[fQ00ay_4fRo2fQbFfQ",
+        hidden: true
     }
 ]
 
