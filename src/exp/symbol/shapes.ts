@@ -1,19 +1,18 @@
 import { P5CanvasInstance } from "@p5-wrapper/react"
 import { randomNumber } from "../../utils/random"
 
-type Point = [number, number]
+export type Point = [number, number]
 const MAX_BOUNDS = 1000
 
-function addSymbol(sketch: P5CanvasInstance) {
+function drawSymbol(sketch: P5CanvasInstance, points: Point[]) {
     sketch.push()
     sketch.noFill()
-    sketch.stroke(255, 255, 255)
+    sketch.stroke(250, 250, 250)
     sketch.strokeWeight(30)
     sketch.strokeCap(sketch.ROUND)
     sketch.strokeJoin(sketch.ROUND)
     
     sketch.beginShape()
-    const points = getSymbolPoints(2, true, true)
     points.forEach(point => sketch.vertex(...point))
     sketch.endShape()
     sketch.pop()
@@ -49,6 +48,7 @@ function randPoint(): Point {
     return [randomNumber(MAX_BOUNDS), randomNumber(MAX_BOUNDS)]
 }
 
+// I did not write this myself
 function intersects(a: Point, b: Point, c: Point, d: Point) {
     var det, gamma, lambda;
     det = (b[0] - a[0]) * (d[1] - c[1]) - (d[0] - c[0]) * (b[1] - a[1]);
@@ -69,4 +69,4 @@ function hasIntersects(nextPoint: Point, list: Point[]) {
         })
 }
 
-export { addSymbol }
+export { drawSymbol, getSymbolPoints }

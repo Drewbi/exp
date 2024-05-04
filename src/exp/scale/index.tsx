@@ -29,8 +29,8 @@ function Object() {
         uniforms.u_time.value = clock.getElapsedTime();
 
         uniforms.u_points.value.forEach((vec, index, arr) => {
-            vec.x = Math.sin(clock.getElapsedTime() - index * 0.008) * 0.2 + 0.5;
-            vec.y = Math.cos(clock.getElapsedTime() - index * 1) * 0.4 + 0.5;
+            vec.x = Math.sin(clock.getElapsedTime() - index * Math.sin(clock.getElapsedTime()) * 0.008) * 0.2 + 0.5;
+            vec.y = Math.cos(clock.getElapsedTime() - index * 1) * 0.3 + 0.5;
         });
     });
 

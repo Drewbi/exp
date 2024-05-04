@@ -8,6 +8,9 @@ import Globe from "./globe"
 import Gen1 from "./gen/gen1"
 import Gen2 from "./gen/gen2"
 import Gen3 from "./gen/gen3"
+import Symbol from "./symbol"
+import Void from "./void"
+import Scale from "./scale"
 
 import anemPreview from "../assets/anemprev.png"
 import dotsPreview from "../assets/dotsprev.png"
@@ -19,6 +22,9 @@ import globePreview from "../assets/globeprev.png"
 import gen1Preview from "../assets/gen1prev.png"
 import palettePreview from "../assets/paletteprev.png"
 import gen3Preview from "../assets/gen3prev.png"
+import symbolPreview from "../assets/symbolprev.png"
+import voidPreview from "../assets/voidprev.png"
+import scalePreview from "../assets/scaleprev.png"
 
 interface Config {
     name?: string,
@@ -112,6 +118,30 @@ const config: Config[] = [
         element: <Gen3 />,
         preview: gen3Preview,
         previewHash: "U07.8uo#kDo#tSfQfkfQkXfRH;f6tSfQayfQ"
+    },
+    {
+        name: "Sym(bl)",
+        date: new Date("5/4/2024"),
+        path: "symbol",
+        element: <Symbol />,
+        preview: symbolPreview,
+        previewHash: "UEECwday00j[offQWBfQ00fQ~qayayfQj[fQ"
+    },
+    {
+        name: "Void",
+        date: new Date("1/11/2024"),
+        path: "void",
+        element: <Void />,
+        preview: voidPreview,
+        previewHash: "U05q|sj[~qt74n~qRjRj~qRjD%Rj-;IU-;Rj"
+    },
+    {
+        name: "Scale",
+        date: new Date("5/5/2024"),
+        path: "scale",
+        element: <Scale />,
+        preview: scalePreview,
+        previewHash: "UNIhsxj[00ayt7fQV[fQ00ay_4fRo2fQbFfQ"
     }
 ]
 

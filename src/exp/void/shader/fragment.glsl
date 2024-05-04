@@ -25,6 +25,6 @@ float frame(vec2 st) {
 }
 
 void main(void) {
-    gl_FragColor = vec4(vec3(frame(vUv.xy)), 1.0);
+    gl_FragColor = vec4(clamp(vec3(frame(vUv.xy)), vec3(0.15), vec3(0.98)), 1.0);
 }
 
