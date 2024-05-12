@@ -32,9 +32,11 @@ export default function () {
                         </li>
                     </div>
                 )}
-                <div className="absolute -left-4 lg:-bottom-4 w-10 h-10 border-8 bg-grey border-white rounded-full flex flex-col justify-center items-center">
-                    <div className="w-2 h-2 bg-white rounded-full"></div>
-                </div>
+                <Link to="/test">
+                    <div className="absolute -left-4 lg:-bottom-4 w-10 h-10 border-8 bg-grey border-white rounded-full flex flex-col justify-center items-center">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                    </div>
+                </Link>
             </ul>
         </div>
     )
