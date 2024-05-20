@@ -8,8 +8,8 @@ export function getCameraPositionAtAngle(normAngle: number, distance: number) {
 export function randomXZforY(y: number, max: number, snap: number): number[] {
     const scaledRandomX = ((Math.random() - 0.5) * 2)
     const scaledRandomZ = ((Math.random() - 0.5) * 2)
-    const x = (Math.floor((Math.sin(scaledRandomX) * (max / y) * 100) / snap)) * snap
-    const z = (Math.floor((Math.cos(scaledRandomZ) * (max / y) * 100) / snap)) * snap
+    const x = (Math.floor((Math.sin(scaledRandomX) * (max / y) * 400) / snap)) * snap
+    const z = (Math.floor((Math.cos(scaledRandomZ) * (max / y) * 40) / snap)) * snap
     return [x, z]
 }
 

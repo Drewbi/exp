@@ -7,12 +7,12 @@ import { getCameraPositionAtAngle, randomSnap, randomXZforY } from './utils'
 function InstancedBoxes({ temp = new THREE.Object3D() }) {
     const boxSize = 10
     const numBoxes = 1000
-    const maxXZ = 500
+    const maxXZ = 300
     const maxY = 500
     const xzAlignment = 1
     const yAlignment = 20
-    const snapSpeed = 50
-    const snapRotations = 10
+    const snapSpeed = 15
+    const snapRotations = 16
 
     const { camera } = useThree()
     const [goalCameraAngle, setGoalCameraAngle] = useState(1 / snapRotations)
@@ -44,7 +44,7 @@ function InstancedBoxes({ temp = new THREE.Object3D() }) {
     useEffect(() => {
         const interval = setInterval(() => {
             setGoalCameraAngle((angle) => angle + 1 / snapRotations)
-        }, 2000);
+        }, 1500);
         return () => clearInterval(interval);
     }, []);
 
@@ -58,7 +58,7 @@ function InstancedBoxes({ temp = new THREE.Object3D() }) {
 
 export default function Tets() {
     return (
-        <Canvas orthographic camera={{ position: [0, 0, 1000], far: 2000 }}>
+        <Canvas orthographic camera={{ position: [0, 0, 1000], near: 0, far: 4000 }}>
             <InstancedBoxes />
         </Canvas >
     )
