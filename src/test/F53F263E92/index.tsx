@@ -6,24 +6,24 @@ import { getCameraPositionAtAngle, randomSnap, randomXZforY } from './utils'
 
 function InstancedBoxes({ temp = new THREE.Object3D() }) {
     const boxSize = 10
-    const numBoxes = 5000
+    const numBoxes = 1000
     const maxXZ = 500
     const maxY = 500
-    const alignment = 25
-    const snapSpeed = 10
-    const snapRotations = 30
+    const xzAlignment = 1
+    const yAlignment = 20
+    const snapSpeed = 50
+    const snapRotations = 10
 
     const { camera } = useThree()
-    const [goalCameraAngle, setGoalCameraAngle] = useState(150)
-    const [cameraAngle, setCameraAngle] = useState(75)
+    const [goalCameraAngle, setGoalCameraAngle] = useState(1 / snapRotations)
+    const [cameraAngle, setCameraAngle] = useState(0)
 
     const ref = useRef<THREE.InstancedMesh>(null!)
 
     useEffect(() => {
         for (let x = 0; x < numBoxes; x++) {
-            const boxY = randomSnap(maxY, alignment)
-            const boxX = randomXZforY(boxY, maxXZ, alignment)
-            const boxZ = randomXZforY(boxY, maxXZ, alignment)
+            const boxY = randomSnap(maxY, yAlignment)
+            const [boxX, boxZ] = randomXZforY(boxY, maxXZ, xzAlignment)
             temp.position.set(boxX, boxY, boxZ)
             temp.updateMatrix()
             ref.current.setMatrixAt(x, temp.matrix)
@@ -44,7 +44,7 @@ function InstancedBoxes({ temp = new THREE.Object3D() }) {
     useEffect(() => {
         const interval = setInterval(() => {
             setGoalCameraAngle((angle) => angle + 1 / snapRotations)
-        }, 1000);
+        }, 2000);
         return () => clearInterval(interval);
     }, []);
 

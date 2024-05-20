@@ -6,7 +6,8 @@
         "dev": "vite",
         "build": "tsc && vite build",
         "preview": "vite preview",
-        "new": "node ./scripts/newtest.js"
+        "new": "node ./scripts/newtest.js",
+        "iter": "node ./scripts/iter.js"
     },
     "dependencies": {
         "@p5-wrapper/react": "^4.2.0",

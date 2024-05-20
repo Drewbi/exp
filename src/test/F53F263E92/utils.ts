@@ -5,10 +5,15 @@ export function getCameraPositionAtAngle(normAngle: number, distance: number) {
     return new Vector3(distance * Math.sin(radianAngle), 0, distance * Math.cos(radianAngle))
 }
 
-export function randomXZforY(y: number, max: number, snap: number) {
-    return (Math.floor((((Math.random() - 0.5) * 2) * (max / y)) * 100 / snap)) * snap
+export function randomXZforY(y: number, max: number, snap: number): number[] {
+    const scaledRandomX = ((Math.random() - 0.5) * 2)
+    const scaledRandomZ = ((Math.random() - 0.5) * 2)
+    const x = (Math.floor((Math.sin(scaledRandomX) * (max / y) * 100) / snap)) * snap
+    const z = (Math.floor((Math.cos(scaledRandomZ) * (max / y) * 100) / snap)) * snap
+    return [x, z]
 }
 
 export function randomSnap(max: number, snap: number) {
-    return (Math.floor((((Math.random() - 0.5) * 2) * max) / snap)) * snap
+    const scaledRandom = ((Math.random() - 0.5) * 2)
+    return (Math.floor((scaledRandom * max) / snap)) * snap
 }

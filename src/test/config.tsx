@@ -3,8 +3,10 @@ const modules = import.meta.glob('/src/test/**/*.tsx', {
     eager: true,
 })
 
+console.log(modules)
+
 interface Config {
-    path: string,
+    path: string | null,
     Element: React.ComponentType<any>,
 }
 
@@ -15,9 +17,9 @@ const routes: Config[] = Object.keys(modules).map(key => {
     }
 })
 
-function parseId(path: string): string {
-    const match = path.match(/test\/([a-zA-Z0-9]+)\//)
-    if (!match || match.length < 2) throw new Error("Could not parse path " + path)
+function parseId(path: string): string | null {
+    const match = path.match(/test\/(.+)\/.+\.tsx/)
+    if (!match || match.length < 2) return null;
     return match[1]
 }
 
