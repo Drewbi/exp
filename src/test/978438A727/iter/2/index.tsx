@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Canvas, ThreeEvent, useFrame } from '@react-three/fiber';
 import fragmentShader from "./shader/fragment.glsl"
-import vertexShader from "../../utils/genericVertex.glsl"
+import vertexShader from "../../../../utils/genericVertex.glsl"
 import * as THREE from 'three';
-import { Outlet } from 'react-router';
 
 interface ShaderMaterialProps {
     mouse: { x: number; y: number };
@@ -46,15 +45,12 @@ const App: React.FC = () => {
     };
 
     return (
-        <>
-            <Canvas ref={canvasRef}>
-                <mesh onPointerMove={(e) => handleMouseMove(e)}>
-                    <planeGeometry args={[8, 8]} />
-                    <ShaderMaterial mouse={mouse} />
-                </mesh>
-            </Canvas>
-            <Outlet />
-        </>
+        <Canvas ref={canvasRef}>
+            <mesh onPointerMove={(e) => handleMouseMove(e)}>
+                <planeGeometry args={[8, 8]} />
+                <ShaderMaterial mouse={mouse} />
+            </mesh>
+        </Canvas>
     );
 };
 

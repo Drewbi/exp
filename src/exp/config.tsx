@@ -142,6 +142,7 @@ const config: Config[] = [
         element: <Scale />,
         preview: scalePreview,
         previewHash: "UA9@SDt600M{oxfQaMfj4mWC_4t6aOfQkTf7",
+        hidden: true,
     }
 ]
 

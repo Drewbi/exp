@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         errorElement: <Error />,
         children: config.map((exp): RouteObject => ({
             path: exp.path,
-            element: exp.element
+            element: exp.element,
         }))
     },
     {
@@ -36,10 +36,26 @@ const router = createBrowserRouter([
         path: '/test',
         element: <Base />,
         errorElement: <Error />,
-        children: testconfig.map(({ path, Element }): RouteObject => ({
-            path: path,
-            element: <Element />
-        })),
+        children: testconfig.map(test => {
+            return {
+                path: test.path,
+                element: <test.Element />,
+            }
+        }),
+    },
+    {
+        path: '/test',
+        element: <Base />,
+        errorElement: <Error />,
+        children: testconfig.map(test => {
+            return {
+                path: test.path,
+                children: test.children.map(iter => ({
+                    path: iter.path,
+                    element: <iter.Element />
+                }))
+            }
+        }),
     }
 ])
 
