@@ -18,7 +18,7 @@ const sketch: Sketch = (p5) => {
     p5.draw = draw(p5)
 }
 
-export default function Mag() {
+export default function App() {
     return (
         <P5 sketch={sketch} />
     )
