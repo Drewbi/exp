@@ -71,7 +71,7 @@ const setup = (p5: P5CanvasInstance) => () => {
 const draw = (p5: P5CanvasInstance) => () => {
     nodes.forEach(node => {
         let curr = node
-        p5.stroke(isDark ? 22 : 240)
+        p5.stroke(240)
         p5.strokeWeight(lineWidth)
         p5.strokeJoin(p5.ROUND)
         p5.beginShape()
