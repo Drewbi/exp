@@ -12,7 +12,7 @@ setInterval(() => {
 setInterval(() => {
     nodes = initNodes()
     isDark = !isDark
-}, 8000)
+}, 6000)
 
 const mapCoordToScreenSpace = (x: number, y: number): [number, number] => {
     const gridWidth = 1000 / nodesPerSide
@@ -71,13 +71,13 @@ const growNodes = () => {
 
 const setup = (p5: P5CanvasInstance) => () => {
     p5.createCanvas(1000, 1000)
-    p5.background(22)
+    p5.background(40)
 }
 
 const draw = (p5: P5CanvasInstance) => () => {
     nodes.forEach(node => {
         let curr = node
-        p5.stroke(isDark ? 22 : 240)
+        p5.stroke(isDark ? 40 : 240)
         p5.strokeWeight(lineWidth)
         p5.strokeJoin(p5.ROUND)
         p5.beginShape()

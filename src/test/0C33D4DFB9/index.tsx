@@ -5,6 +5,7 @@ const lineWidth = 10
 const maxIndex = nodesPerSide - 1
 let mouseX = null
 let mouseY = null
+let dark = false
 
 const mapCoordToScreenSpace = (x: number, y: number): [number, number] => {
     const gridWidth = 1000 / nodesPerSide
@@ -64,14 +65,14 @@ const clearNodes = () => {
 
 const setup = (p5: P5CanvasInstance) => () => {
     p5.createCanvas(1000, 1000)
-    p5.background(22)
+    p5.background(40)
     growNodes()
 }
 
 const draw = (p5: P5CanvasInstance) => () => {
     nodes.forEach(node => {
         let curr = node
-        p5.stroke(240)
+        p5.stroke(dark ? 40 : 240)
         p5.strokeWeight(lineWidth)
         p5.strokeJoin(p5.ROUND)
         p5.beginShape()
@@ -86,7 +87,8 @@ const draw = (p5: P5CanvasInstance) => () => {
 }
 
 const mouseClicked = (sketch: P5CanvasInstance) => (e: any) => {
-    growNodes()
+    clearNodes()
+    dark = !dark
 }
 
 const mouseMoved = (sketch: P5CanvasInstance) => (e: any) => {
@@ -97,6 +99,8 @@ const mouseMoved = (sketch: P5CanvasInstance) => (e: any) => {
         mouseX = null
         mouseY = null
     }
+
+    growNodes()
 }
 
 const sketch: Sketch = (p5) => {

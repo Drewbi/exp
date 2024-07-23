@@ -11,6 +11,8 @@ import Gen3 from "./gen/gen3"
 import Symbol from "./symbol"
 import Void from "./void"
 import Scale from "./scale"
+import Drown from "./drown"
+import Ice from "./ice"
 
 import anemPreview from "../assets/anemprev.png"
 import dotsPreview from "../assets/dotsprev.png"
@@ -25,6 +27,8 @@ import gen3Preview from "../assets/gen3prev.png"
 import symbolPreview from "../assets/symbolprev.png"
 import voidPreview from "../assets/voidprev.png"
 import scalePreview from "../assets/scaleprev.png"
+import drownPreview from "../assets/drownprev.png"
+import icePreview from "../assets/iceprev.png"
 
 interface Config {
     name?: string,
@@ -143,6 +147,22 @@ const config: Config[] = [
         preview: scalePreview,
         previewHash: "UA9@SDt600M{oxfQaMfj4mWC_4t6aOfQkTf7",
         hidden: true,
+    },
+    {
+        name: "Drown",
+        date: new Date("6/30/2024"),
+        path: "drown",
+        element: <Drown />,
+        preview: drownPreview,
+        hidden: false,
+    },
+    {
+        name: "Ice",
+        date: new Date("7/23/2024"),
+        path: "ice",
+        element: <Ice />,
+        preview: icePreview,
+        hidden: false,
     }
 ]
 
